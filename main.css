@@ -1,0 +1,106 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --default-font-family: "Lexend", sans-serif;
+  --font-mono: "Fira Code", monospace;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+code {
+  @apply text-sm;
+}
+
+.preview-image {
+  @apply mt-2;
+  min-height: 180px;
+  image-rendering: pixelated;
+}
+
+.prose {
+  @apply text-sm;
+
+  a {
+    @apply text-blue-600 dark:text-blue-500 underline;
+  }
+
+  ul {
+    @apply list-disc list-inside;
+  }
+}
+
+select:focus {
+  outline: none;
+}
+
+select > option {
+  font-family: "Lexend", monospace;
+}
+
+#toast {
+  display: none;
+}
+
+#toast.animate-toast {
+  animation: moveUpFadeOut 3s ease forwards;
+  display: block;
+}
+
+@keyframes moveUpFadeOut {
+  0% {
+    transform: translateY(100px);
+    opacity: 1;
+    display: unset;
+  }
+  10% {
+    transform: translateY(0);
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+  101% {
+    transform: translateY(100px);
+    display: none;
+  }
+}
+
+.chroma-line {
+  display: flex;
+}
+
+/*
+  styles for chroma code snippets
+  types can be found at
+  https://github.com/alecthomas/chroma/blob/62197e9ddb9d7e7db982a71113c3b1fcdd6cbba0/types.go#L210
+*/
+.chroma-p {
+  color: #000000;
+}
+.chroma-k {
+  color: #00a8c8;
+}
+.chroma-nt {
+  color: #f92672;
+} 
+.chroma-s2 {
+  color: #d88200;
+}
+.chroma-c, .chroma-c1 {
+  color: #75715e;
+}
+.chroma-mi, .chroma-mf {
+  color: #ae81ff;
+}
+.chroma-kc {
+  color: #00a8c8;
+}
+.dark {
+  .chroma-p {
+    color: #ffffff;
+  }
+}
