@@ -12,10 +12,10 @@ sidebarToggle.onclick = () => {
     if (showSidebar) {
         sidebar.classList.remove("hidden")
         mainContent.classList.remove("rounded-r")
-        sidebarToggleIcon.src = "/OcSidebarcollapse2.svg"
+        sidebarToggleIcon.src = ROOT_DIRECTORY + "/OcSidebarcollapse2.svg"
     } else {
         sidebar.classList.add("hidden")
         mainContent.classList.add("rounded-r")
-        sidebarToggleIcon.src = "/OcSidebarexpand2.svg"
+        sidebarToggleIcon.src = ROOT_DIRECTORY + "/OcSidebarexpand2.svg"
     }
 }

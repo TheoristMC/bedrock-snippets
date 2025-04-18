@@ -13,11 +13,11 @@ function updateThemeSelectorIcon() {
     const theme = localStorage.getItem("theme")
     const themeSelectorIcon = document.querySelector("#theme-selector-icon")
     if (theme == "light") {
-        themeSelectorIcon.src = "/OcSun2.svg"
+        themeSelectorIcon.src = ROOT_DIRECTORY + "/OcSun2.svg"
     } else if (theme == "dark") {
-        themeSelectorIcon.src = "/OcMoon2.svg"
+        themeSelectorIcon.src = ROOT_DIRECTORY + "/OcMoon2.svg"
     } else {
-        themeSelectorIcon.src = "/OcDevicedesktop2.svg"
+        themeSelectorIcon.src = ROOT_DIRECTORY + "/OcDevicedesktop2.svg"
     }
 }
 

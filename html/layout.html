@@ -4,22 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="/favicon.png">
+    <link rel="icon" type="image/x-icon" href="{{.ROOT_DIRECTORY}}/favicon.png">
     <title>Bedrock Snippets: {{.Title}}</title>
-    <link href="/main.css" rel="stylesheet">
-
+    <link href="{{.ROOT_DIRECTORY}}/main.css" rel="stylesheet">
+    <script>var ROOT_DIRECTORY = {{.ROOT_DIRECTORY}}</script>
 </head>
 
 <body class="dark:bg-neutral-900 dark:text-white dark:fill-white flex flex-col h-[100dvh]">
-    <script src="/js/theme.js"></script>
+    <script src="{{.ROOT_DIRECTORY}}/js/theme.js"></script>
     <div class="bg-neutral-100 dark:bg-neutral-800 p-2 border-b border-neutral-300 dark:border-neutral-600 flex gap-2 items-center">
-        <a href="/" class="flex flex-row items-center gap-1">
-            <img class="h-8 w-8" src="/favicon.png">
+        <a href="{{.ROOT_DIRECTORY}}" class="flex flex-row items-center gap-1">
+            <img class="h-8 w-8" src="{{.ROOT_DIRECTORY}}/favicon.png">
             <h1 class="text-lg font-semibold">Bedrock Snippets</h1>
         </a>
         <div class="ml-auto mr-2">
             <div class="bg-neutral-200 dark:bg-neutral-900 flex items-center justify-center gap-2 py-1.5 px-2 rounded">
-                <img id="theme-selector-icon" class="dark:invert" src="/OcSun2.svg">
+                <img id="theme-selector-icon" class="dark:invert" src="{{.ROOT_DIRECTORY}}/OcSun2.svg">
                 <select class="dark:bg-neutral-900 cursor-pointer" id="theme-selector">
                     <option value="auto">
                         System

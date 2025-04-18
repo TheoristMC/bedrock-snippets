@@ -43,7 +43,10 @@ func runDevServer() {
 		fs.ServeHTTP(w, r)
 	})
 
-	http.Handle("/", http.StripPrefix("/", noCacheHandler))
+	http.Handle(ROOT_DIRECTORY+"/", http.StripPrefix(ROOT_DIRECTORY+"/", noCacheHandler))
+	if ROOT_DIRECTORY != "" {
+		http.Handle("/", http.RedirectHandler(ROOT_DIRECTORY, 307))
+	}
 
 	fmt.Printf("serving static files from %s on http://localhost%s\n", staticDir, port)
 	if err := http.ListenAndServe(port, nil); err != nil {

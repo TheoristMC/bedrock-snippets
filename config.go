@@ -22,3 +22,4 @@ type SnippetData struct {
 }
 
 const REPOSITORY_ROOT string = "https://github.com/Hatchibombotar/bedrock-snippets/"
+const ROOT_DIRECTORY string = "/bedrock-snippets"

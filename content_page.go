@@ -43,7 +43,7 @@ func generatePagesForSnippet(snippetName string) {
 
 	sidebar := generateSidebarElement(snippetName, "", 0)
 
-	sourceHref := REPOSITORY_ROOT + "main/blob/snippets/" + snippetName
+	sourceHref := REPOSITORY_ROOT + "tree/main/snippets/" + snippetName
 
 	filepath.WalkDir("snippets/"+snippetName+"/", func(path string, d fs.DirEntry, err error) error {
 		if d.IsDir() {
@@ -71,18 +71,20 @@ func generatePagesForSnippet(snippetName string) {
 		ext := filepath.Ext(path)
 
 		data := struct {
-			Title        string
-			SidebarHTML  template.HTML
-			Breadcrumbs  string
-			TextContent  template.HTML
-			OverviewPage bool
-			SourceHref   string
+			Title          string
+			SidebarHTML    template.HTML
+			Breadcrumbs    string
+			TextContent    template.HTML
+			OverviewPage   bool
+			SourceHref     string
+			ROOT_DIRECTORY string
 		}{
-			Title:        snippetName,
-			SidebarHTML:  template.HTML(sidebar.Render()),
-			Breadcrumbs:  strings.Join(strings.Split(filepath.ToSlash(rawPath), "/"), " > "),
-			OverviewPage: false,
-			SourceHref:   sourceHref,
+			Title:          snippetName,
+			SidebarHTML:    template.HTML(sidebar.Render()),
+			Breadcrumbs:    strings.Join(strings.Split(filepath.ToSlash(rawPath), "/"), " > "),
+			OverviewPage:   false,
+			SourceHref:     sourceHref,
+			ROOT_DIRECTORY: ROOT_DIRECTORY,
 		}
 
 		if ext == ".json" || ext == ".material" {
@@ -117,19 +119,21 @@ func generatePagesForSnippet(snippetName string) {
 	renderedIndexFileContent := template.HTML(mdToHTML([]byte(indexFileContent)))
 
 	data := struct {
-		Title        string
-		SidebarHTML  template.HTML
-		Breadcrumbs  string
-		TextContent  template.HTML
-		OverviewPage bool
-		SourceHref   string
+		Title          string
+		SidebarHTML    template.HTML
+		Breadcrumbs    string
+		TextContent    template.HTML
+		OverviewPage   bool
+		SourceHref     string
+		ROOT_DIRECTORY string
 	}{
-		Title:        snippetName,
-		SidebarHTML:  template.HTML(sidebar.Render()),
-		Breadcrumbs:  snippetName + " > overview",
-		OverviewPage: true,
-		TextContent:  renderedIndexFileContent,
-		SourceHref:   sourceHref,
+		Title:          snippetName,
+		SidebarHTML:    template.HTML(sidebar.Render()),
+		Breadcrumbs:    snippetName + " > overview",
+		OverviewPage:   true,
+		TextContent:    renderedIndexFileContent,
+		SourceHref:     sourceHref,
+		ROOT_DIRECTORY: ROOT_DIRECTORY,
 	}
 
 	err = tmpl.ExecuteTemplate(indexFile, "layout.html", data)
@@ -154,7 +158,7 @@ func generateSidebarElement(snippetName string, base string, level int) *elem.El
 		anchorElement := elem.A(
 			attrs.Props{
 				attrs.Class: "hover:bg-neutral-200 dark:hover:bg-neutral-700 px-1",
-				attrs.Href:  "/snippets/" + snippetName + "/",
+				attrs.Href:  ROOT_DIRECTORY + "/snippets/" + snippetName + "/",
 			},
 			elem.Text("readme"),
 		)
@@ -176,7 +180,7 @@ func generateSidebarElement(snippetName string, base string, level int) *elem.El
 			elem.Text(e.Name()),
 		)
 		if !e.IsDir() {
-			anchorElement.Attrs[attrs.Href] = "/snippets/" + snippetName + "/" + base + e.Name()
+			anchorElement.Attrs[attrs.Href] = ROOT_DIRECTORY + "/snippets/" + snippetName + "/" + base + e.Name()
 		}
 		content.Children = append(
 			content.Children,

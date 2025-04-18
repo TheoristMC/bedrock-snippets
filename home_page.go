@@ -24,11 +24,13 @@ func generateHomepage() {
 	defer outputFile.Close()
 
 	data := struct {
-		Content template.HTML
-		Title   string
+		Content        template.HTML
+		Title          string
+		ROOT_DIRECTORY string
 	}{
-		Content: homepageLinks,
-		Title:   "Home",
+		Content:        homepageLinks,
+		Title:          "Home",
+		ROOT_DIRECTORY: ROOT_DIRECTORY,
 	}
 
 	err = tmpl.ExecuteTemplate(
@@ -92,7 +94,7 @@ func generateHomepageLinks() template.HTML {
 				},
 				elem.Img(
 					attrs.Props{
-						attrs.Src:   category.Icon,
+						attrs.Src:   ROOT_DIRECTORY + category.Icon,
 						attrs.Class: "w-6 h-6 inline mr-1",
 					},
 				),
@@ -108,7 +110,7 @@ func generateHomepageLinks() template.HTML {
 			categoryDiv.Children = append(categoryDiv.Children,
 				elem.A(
 					attrs.Props{
-						attrs.Href: "/snippets/" + snippet.id,
+						attrs.Href: ROOT_DIRECTORY + "/snippets/" + snippet.id,
 					},
 					elem.Span(attrs.Props{
 						attrs.Class: "text-blue-600 dark:text-blue-500",

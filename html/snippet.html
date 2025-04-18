@@ -7,7 +7,7 @@
             <a href="{{.SourceHref}}" class="text-neutral-700 dark:text-neutral-400 text-sm hover:underline">View Source</a>
         </div>
         <button id="sidebar-toggle" class="h-8 w-8 bg-neutral-200 dark:bg-neutral-800 rounded flex items-center justify-center cursor-pointer">
-            <img id="sidebar-toggle-icon" class="h-4 w-4 dark:invert" src="/OcSidebarcollapse2.svg">
+            <img id="sidebar-toggle-icon" class="h-4 w-4 dark:invert" src="{{.ROOT_DIRECTORY}}/OcSidebarcollapse2.svg">
         </button>
     </div>
     <div class="flex flex-row p-2 flex-grow overflow-auto ">
@@ -19,7 +19,7 @@
                 {{if not .OverviewPage}}
                 <div class="mr-3 ml-auto flex flex-row gap-2 items-center">
                     <button type="button" id="copy-content" class="cursor-pointer">
-                        <img class="h-4 w-4 dark:invert" src="/OcCopy2.svg">
+                        <img class="h-4 w-4 dark:invert" src="{{.ROOT_DIRECTORY}}/OcCopy2.svg">
                     </button>
                     <!-- <a href="#">
                         <img class="h-4 w-4 dark:invert" src="/OcLink2.svg">
@@ -67,7 +67,7 @@
         </spa>
 </div>
 
-<script src="/js/copy.js" module></script>
-<script src="/js/sidebar.js" module></script>
+<script src="{{.ROOT_DIRECTORY}}/js/copy.js" module></script>
+<script src="{{.ROOT_DIRECTORY}}/js/sidebar.js" module></script>
 
 {{end}}
