@@ -27,7 +27,7 @@ jobs:
       run: go get
 
     - name: Build
-      run: go build -v ./...
+      run: go run .
 
     - name: Deploy 🚀
       uses: JamesIves/github-pages-deploy-action@4.1.0
