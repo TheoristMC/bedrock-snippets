@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/favicon.png">
+    <title>Bedrock Snippets: custom_sword</title>
+    <link href="/main.css" rel="stylesheet">
+
+</head>
+
+<body class="dark:bg-neutral-900 dark:text-white dark:fill-white flex flex-col h-[100dvh]">
+    <script src="/js/theme.js"></script>
+    <div class="bg-neutral-100 dark:bg-neutral-800 p-2 border-b border-neutral-300 dark:border-neutral-600 flex gap-2 items-center">
+        <a href="/" class="flex flex-row items-center gap-1">
+            <img class="h-8 w-8" src="/favicon.png">
+            <h1 class="text-lg font-semibold">Bedrock Snippets</h1>
+        </a>
+        <div class="ml-auto mr-2">
+            <div class="bg-neutral-200 dark:bg-neutral-900 flex items-center justify-center gap-2 py-1.5 px-2 rounded">
+                <img id="theme-selector-icon" class="dark:invert" src="/OcSun2.svg">
+                <select class="dark:bg-neutral-900 cursor-pointer" id="theme-selector">
+                    <option value="auto">
+                        System
+                    </option>
+                    <option value="light">
+                        Light
+                    </option>
+                    <option value="dark">
+                        Dark
+                    </option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    
+<div class="flex flex-col overflow-auto flex-grow">
+
+    <div class="p-2 pb-0 flex justify-between items-center">
+        <div>
+            <h1>custom_sword</h1>
+            <a href="https://github.com/Hatchibombotar/bedrock-snippets/main/blob/snippets/custom_sword" class="text-neutral-700 dark:text-neutral-400 text-sm hover:underline">View Source</a>
+        </div>
+        <button id="sidebar-toggle" class="h-8 w-8 bg-neutral-200 dark:bg-neutral-800 rounded flex items-center justify-center cursor-pointer">
+            <img id="sidebar-toggle-icon" class="h-4 w-4 dark:invert" src="/OcSidebarcollapse2.svg">
+        </button>
+    </div>
+    <div class="flex flex-row p-2 flex-grow overflow-auto ">
+        <div
+        id="main-content"
+        class="w-full overflow-hidden relative bg-neutral-100 rounded-l dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-600">
+            <div class="absolute pl-2 pt-1 flex flex-row w-full bg-neutral-100 dark:bg-neutral-800 rounded-l">
+                <p class="whitespace-nowrap overflow-hidden overflow-ellipsis">custom_sword &gt; RP &gt; textures &gt; snippets &gt; items &gt; custom_sword.png</p>
+                
+                <div class="mr-3 ml-auto flex flex-row gap-2 items-center">
+                    <button type="button" id="copy-content" class="cursor-pointer">
+                        <img class="h-4 w-4 dark:invert" src="/OcCopy2.svg">
+                    </button>
+                    
+                </div>
+                
+            </div>
+            <div
+                class="h-full overflow-y-auto overflow-x-auto grow min-h-64 p-2 pt-8 w-full">
+                
+                <img id="snippet-content" data-content-type="image" class="preview-image" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAH2GVYSWZJSSoACAAAAAAADgAAAAkA/gAEAAEAAAABAAAAAAEEAAEAAAAAAQAAAQEEAAEAAAAAAQAAAgEDAAMAAACAAAAAAwEDAAEAAAAGAAAABgEDAAEAAAAGAAAAFQEDAAEAAAADAAAAAQIEAAEAAACGAAAAAgIEAAEAAABSBwAAAAAAAAgACAAIAP/Y/+AAEEpGSUYAAQEAAAEAAQAA/9sAQwAIBgYHBgUIBwcHCQkICgwUDQwLCwwZEhMPFB0aHx4dGhwcICQuJyAiLCMcHCg3KSwwMTQ0NB8nOT04MjwuMzQy/9sAQwEJCQkMCwwYDQ0YMiEcITIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIy/8AAEQgBAAEAAwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/aAAwDAQACEQMRAD8A+f6KKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKANeiiiuc5AooooAKKKKAMiiiiug6wooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKANeiiiuc5D3+iiiszEKKKKAPnSiiiug7CpRRRWhqFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAGvRRRXOch7/AEUUVmYnDUUUVzHAdzRRRXSd586UUUV0HYVKKKK0NQooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigDXooornOQ9/ooorMxOGooormOA7miiiuk7z50oooroOwqUUUVoahRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAGvRRRXOch7/RRRWZicNRRRXMcBpUUUVmZHjdFFFeqfQFSiiitDUKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA16KKK5zkPf6KKKzMThqKKK5jgNKiiiszI8booor1T6AqUUUVoahRRRQAUUUUAFFFFABRRRQBr0UUVznIFFFFAGRRRRXQdYUUUUAFFFFAHV0UUVxnnHtdFFFAHDUUUVzHAdzRRRXSd54BRRRWhsZFFFFdB1hRRRQAUUUUAFFFFABRRRQAUUUUAa9FFFc5yGpRRRWZiZdFFFaGxqUUUVmYmXRRRWhse/wBFFFZmJ59RRRXgHnm1RRRXpGZ43RRRXqn0BUooorQ1CiiigAooooAKKKKACiiigAooooAKKKKACiiigDXooornOQ6iiiisDjNaiiivDOU9Booor3z0Dz6iiivAPPNqiiivSMzyeiiivRPaMiiiiug6wooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKANeiiiuc5CeiiipEeoUUUVwHjGdRRRWhqaVFFFZmR5PRRRXontBRRRQBkUUUV0HWFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAdLRRRXIcBRoooqzQ9YooorzjxTFooorzTQ4Giiivoz1gooooAyKKKK6DrCiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA7WiiivLOw2qKKK5yzm6KKK9A+fMuiiitDY6iiiisDjOLooorrPSKlFFFaGoUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAHa0UUV5Z2Ha0UUV550Hl1FFFeycJjUUUV1mJbooorMyCiiigC5RRRWZiU6KKK0NipRRRWhqFFFFABRRRQAUUUUAFFFFABRRRQBr0UUVznIFFFFAHcUUUV5Z7ZxNFFFeicpjUUUV1mIUUUUAFFFFABRRRQBbooorMyCiiigCpRRRWhqFFFFABRRRQAUUUUAFFFFABRRRQBr0UUVznId9RRRXzh5J5rRRRX057hUooorQ1CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKALdFFFZmQUUUUAFFFFAFSiiitDUKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA//ZUWoo/wAAAAFzUkdCAdnJLH8AAAAEZ0FNQQAAsY8L/GEFAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAAGYktHRAA+ACwAIgNlQ/gAAAAJcEhZcwAADr8AAA6/ATgFUyQAAAAHdElNRQfpAx4JOhLTOC4oAAABKklEQVQ4y2NkIAOwKbP/ZyAXsCmz/69eUf+/ekX9fyZB5v9MJGr+UtpawbDh+maybP5evaL+v3a9Edx2kp2tXW/033S6LUWa/+LUzKbM/h89dAVshf8jO5tNmf03XpsEbIX/I9PVK+r/KzYwwJyNVTMLjPHr7k9GBgaG/6Imkgxsmg8YsjXqGZbdaGQQEbdluNhziuHf+7+s2AxgRHcFCycLg1aWIcP3l98YuCS4GS72nIIZjhWgpINfd38yMnOxMlzqPc3AJcHN8OblYYKBjGKyuzHvfwUpboaVH34zfHv2hUHURJLh+a7HDP/e/2UkaJK7Me//rnSl/8oSkGhiEmT+zyTI/J9NmR1/vMOiL8NXAq4ZxY9Qg/AaoNjAQFrqQg4DZI1E+RUNAACcxod9WhKUhwAAAABJRU5ErkJggg==" >
+                
+            </div>
+        </div>
+
+        <div
+            id="sidebar"
+            class="w-64 bg-neutral-100 dark:bg-neutral-800 border-r border-t border-b border-neutral-300 dark:border-neutral-600 rounded-r flex flex-col text-sm">
+            <div class="border-b border-neutral-300 dark:border-neutral-600 flex flex-row w-full items-center">
+                <p class="px-1 my-1 mx-1 font-semibold">custom_sword</p>
+                
+            </div>
+            <div class="flex flex-col overflow-auto">
+                <div class="flex flex-col" id="container"><a class="hover:bg-neutral-200 dark:hover:bg-neutral-700 px-1" href="/snippets/custom_sword/">readme</a><a class="hover:bg-neutral-200 dark:hover:bg-neutral-700 px-1" style="padding-left: calc(var(--spacing) * 1);">BP</a><div class="flex flex-col" id="container"><a class="hover:bg-neutral-200 dark:hover:bg-neutral-700 px-1" style="padding-left: calc(var(--spacing) * 3);">items</a><div class="flex flex-col" id="container"><a class="hover:bg-neutral-200 dark:hover:bg-neutral-700 px-1" href="/snippets/custom_sword/BP/items/sword.json" style="padding-left: calc(var(--spacing) * 5);">sword.json</a></div><a class="hover:bg-neutral-200 dark:hover:bg-neutral-700 px-1" style="padding-left: calc(var(--spacing) * 3);">recipes</a><div class="flex flex-col" id="container"><a class="hover:bg-neutral-200 dark:hover:bg-neutral-700 px-1" href="/snippets/custom_sword/BP/recipes/emerald_sword.json" style="padding-left: calc(var(--spacing) * 5);">emerald_sword.json</a></div></div><a class="hover:bg-neutral-200 dark:hover:bg-neutral-700 px-1" style="padding-left: calc(var(--spacing) * 1);">RP</a><div class="flex flex-col" id="container"><a class="hover:bg-neutral-200 dark:hover:bg-neutral-700 px-1" style="padding-left: calc(var(--spacing) * 3);">textures</a><div class="flex flex-col" id="container"><a class="hover:bg-neutral-200 dark:hover:bg-neutral-700 px-1" href="/snippets/custom_sword/RP/textures/item_texture.json" style="padding-left: calc(var(--spacing) * 5);">item_texture.json</a><a class="hover:bg-neutral-200 dark:hover:bg-neutral-700 px-1" style="padding-left: calc(var(--spacing) * 5);">snippets</a><div class="flex flex-col" id="container"><a class="hover:bg-neutral-200 dark:hover:bg-neutral-700 px-1" style="padding-left: calc(var(--spacing) * 7);">items</a><div class="flex flex-col" id="container"><a class="hover:bg-neutral-200 dark:hover:bg-neutral-700 px-1" href="/snippets/custom_sword/RP/textures/snippets/items/custom_sword.png" style="padding-left: calc(var(--spacing) * 9);">custom_sword.png</a></div></div></div></div></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="flex justify-center w-full fixed bottom-6">
+    <span id="toast" class="bg-black text-white rounded px-2 py-1">
+        Copied to Clipboard
+        </spa>
+</div>
+
+<script src="/js/copy.js" module></script>
+<script src="/js/sidebar.js" module></script>
+
+
+</body>
+
+</html>

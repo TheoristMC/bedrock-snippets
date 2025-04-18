@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/favicon.png">
+    <title>Bedrock Snippets: example</title>
+    <link href="/main.css" rel="stylesheet">
+
+</head>
+
+<body class="dark:bg-neutral-900 dark:text-white dark:fill-white flex flex-col h-[100dvh]">
+    <script src="/js/theme.js"></script>
+    <div class="bg-neutral-100 dark:bg-neutral-800 p-2 border-b border-neutral-300 dark:border-neutral-600 flex gap-2 items-center">
+        <a href="/" class="flex flex-row items-center gap-1">
+            <img class="h-8 w-8" src="/favicon.png">
+            <h1 class="text-lg font-semibold">Bedrock Snippets</h1>
+        </a>
+        <div class="ml-auto mr-2">
+            <div class="bg-neutral-200 dark:bg-neutral-900 flex items-center justify-center gap-2 py-1.5 px-2 rounded">
+                <img id="theme-selector-icon" class="dark:invert" src="/OcSun2.svg">
+                <select class="dark:bg-neutral-900 cursor-pointer" id="theme-selector">
+                    <option value="auto">
+                        System
+                    </option>
+                    <option value="light">
+                        Light
+                    </option>
+                    <option value="dark">
+                        Dark
+                    </option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    
+<div class="flex flex-col overflow-auto flex-grow">
+
+    <div class="p-2 pb-0 flex justify-between items-center">
+        <div>
+            <h1>example</h1>
+            <a href="https://github.com/Hatchibombotar/bedrock-snippets/main/blob/snippets/example" class="text-neutral-700 dark:text-neutral-400 text-sm hover:underline">View Source</a>
+        </div>
+        <button id="sidebar-toggle" class="h-8 w-8 bg-neutral-200 dark:bg-neutral-800 rounded flex items-center justify-center cursor-pointer">
+            <img id="sidebar-toggle-icon" class="h-4 w-4 dark:invert" src="/OcSidebarcollapse2.svg">
+        </button>
+    </div>
+    <div class="flex flex-row p-2 flex-grow overflow-auto ">
+        <div
+        id="main-content"
+        class="w-full overflow-hidden relative bg-neutral-100 rounded-l dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-600">
+            <div class="absolute pl-2 pt-1 flex flex-row w-full bg-neutral-100 dark:bg-neutral-800 rounded-l">
+                <p class="whitespace-nowrap overflow-hidden overflow-ellipsis">example &gt; RP &gt; pearlescent_froglight_side.png</p>
+                
+                <div class="mr-3 ml-auto flex flex-row gap-2 items-center">
+                    <button type="button" id="copy-content" class="cursor-pointer">
+                        <img class="h-4 w-4 dark:invert" src="/OcCopy2.svg">
+                    </button>
+                    
+                </div>
+                
+            </div>
+            <div
+                class="h-full overflow-y-auto overflow-x-auto grow min-h-64 p-2 pt-8 w-full">
+                
+                <img id="snippet-content" data-content-type="image" class="preview-image" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAABN0lEQVQ4jY1STWvDMAzVTPqBvejgBEZrBtsp7K/u1+w+2H8YO4Texoopg8QMJQ6kPnQHdSKkPUwH8fT09GRj37w8v9rtGgCsWwSfrFtgafIC/e7gqk3XEuPgU6Rx7E+Z3a5FBHBw1UajHShgaTTariUAcNUGS6Im7us+E7VG6yrQaAHOGQDyAqelwaQYabRLrbmx1JpJYTjuHh+sW2R/h5mHSNlLjNS0J96CpwwAYGnUzP5SN8V5gerSRuI4DDOma0n9R3cchqXWzCupry6ZBTVR8dOI61UwUOB83sBIeqJm3fQCwSdFTZSZgQIvFAshhcmCT1hSXqCYyRjn6QUijVmkkZf43QFLQ03MC2SGcdcSl8EnAMjG/rSve4De4GpffxtcYUnBJ4AIAB9vX5HG+6fbz/cf/t6/wjDQrkqIsf8AAAAASUVORK5CYII=" >
+                
+            </div>
+        </div>
+
+        <div
+            id="sidebar"
+            class="w-64 bg-neutral-100 dark:bg-neutral-800 border-r border-t border-b border-neutral-300 dark:border-neutral-600 rounded-r flex flex-col text-sm">
+            <div class="border-b border-neutral-300 dark:border-neutral-600 flex flex-row w-full items-center">
+                <p class="px-1 my-1 mx-1 font-semibold">example</p>
+                
+            </div>
+            <div class="flex flex-col overflow-auto">
+                <div class="flex flex-col" id="container"><a class="hover:bg-neutral-200 dark:hover:bg-neutral-700 px-1" href="/snippets/example/">readme</a><a class="hover:bg-neutral-200 dark:hover:bg-neutral-700 px-1" style="padding-left: calc(var(--spacing) * 1);">RP</a><div class="flex flex-col" id="container"><a class="hover:bg-neutral-200 dark:hover:bg-neutral-700 px-1" href="/snippets/example/RP/pearlescent_froglight_side.png" style="padding-left: calc(var(--spacing) * 3);">pearlescent_froglight_side.png</a></div></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="flex justify-center w-full fixed bottom-6">
+    <span id="toast" class="bg-black text-white rounded px-2 py-1">
+        Copied to Clipboard
+        </spa>
+</div>
+
+<script src="/js/copy.js" module></script>
+<script src="/js/sidebar.js" module></script>
+
+
+</body>
+
+</html>

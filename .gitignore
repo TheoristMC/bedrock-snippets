@@ -1,9 +1,0 @@
-*.exe
-*.exe~
-*.dll
-*.so
-*.dylib
-
-node_modules
-build
-.tmp

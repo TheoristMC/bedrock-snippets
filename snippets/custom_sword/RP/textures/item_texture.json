@@ -1,9 +1,0 @@
-{
-    "resource_pack_name": "snippets",
-    "texture_name": "atlas.items",
-    "texture_data": {
-        "snippets:custom_sword": {
-            "textures": "textures/snippets/items/custom_sword"
-        }
-    }
-}
