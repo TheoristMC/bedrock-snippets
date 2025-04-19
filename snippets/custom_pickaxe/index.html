@@ -14,13 +14,13 @@
     <script src="/bedrock-snippets/js/theme.js"></script>
     <div class="bg-neutral-100 dark:bg-neutral-800 p-2 border-b border-neutral-300 dark:border-neutral-600 flex gap-2 items-center">
         <a href="/bedrock-snippets" class="flex flex-row items-center gap-1">
-            <img class="h-8 w-8" src="/bedrock-snippets/favicon.png">
+            <img class="h-8 w-8" src="/bedrock-snippets/favicon.png" alt="">
             <h1 class="text-lg font-semibold">Bedrock Snippets</h1>
         </a>
         <div class="ml-auto mr-2">
-            <div class="bg-neutral-200 dark:bg-neutral-900 flex items-center justify-center gap-2 py-1.5 px-2 rounded">
-                <img id="theme-selector-icon" class="dark:invert" src="/bedrock-snippets/OcSun2.svg">
-                <select class="dark:bg-neutral-900 cursor-pointer" id="theme-selector">
+            <div class="bg-neutral-200 dark:bg-neutral-900 flex items-center justify-center gap-2 py-1.5 px-2 rounded focus-within:outline-2">
+                <img id="theme-selector-icon" class="dark:invert h-4 w-4" src="/bedrock-snippets/OcSun2.svg" alt="">
+                <select class="dark:bg-neutral-900 cursor-pointer" id="theme-selector" title="Theme Selector">
                     <option value="auto">
                         System
                     </option>
@@ -43,8 +43,8 @@
             <h1>custom_pickaxe</h1>
             <a href="https://github.com/Hatchibombotar/bedrock-snippets/tree/main/snippets/custom_pickaxe" class="text-neutral-700 dark:text-neutral-400 text-sm hover:underline">View Source</a>
         </div>
-        <button id="sidebar-toggle" class="h-8 w-8 bg-neutral-200 dark:bg-neutral-800 rounded flex items-center justify-center cursor-pointer">
-            <img id="sidebar-toggle-icon" class="h-4 w-4 dark:invert" src="/bedrock-snippets/OcSidebarcollapse2.svg">
+        <button id="sidebar-toggle" type="button" title="Toggle Sidebar" class="h-8 w-8 bg-neutral-200 dark:bg-neutral-800 rounded flex items-center justify-center cursor-pointer">
+            <img id="sidebar-toggle-icon" class="h-4 w-4 dark:invert" src="/bedrock-snippets/OcSidebarcollapse2.svg" alt="">
         </button>
     </div>
     <div class="flex flex-row p-2 flex-grow overflow-auto ">
@@ -74,7 +74,7 @@
                 
             </div>
             <div class="flex flex-col overflow-auto">
-                <div class="flex flex-col" id="container"><a class="hover:bg-neutral-200 dark:hover:bg-neutral-700 px-1" href="/bedrock-snippets/snippets/custom_pickaxe/">readme</a></div>
+                <div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/custom_pickaxe/">readme</a></div>
             </div>
         </div>
     </div>
@@ -91,6 +91,7 @@
 <script src="/bedrock-snippets/js/sidebar.js" module></script>
 
 
+    <script src="/bedrock-snippets/js/preload.js" type="module"></script>
 </body>
 
 </html>

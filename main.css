@@ -1,6 +1,6 @@
 /*! tailwindcss v4.0.0 | MIT License | https://tailwindcss.com */
 @import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400&display=swap");
 @layer theme, base, components, utilities;
 @layer theme {
   :root {
@@ -720,6 +720,9 @@
   .px-2 {
     padding-inline: calc(var(--spacing) * 2);
   }
+  .py-0\.5 {
+    padding-block: calc(var(--spacing) * 0.5);
+  }
   .py-1 {
     padding-block: calc(var(--spacing) * 1);
   }
@@ -776,6 +779,12 @@
   .\[localhost\:8080\] {
     localhost: 8080;
   }
+  .focus-within\:outline-2 {
+    &:focus-within {
+      outline-style: var(--tw-outline-style);
+      outline-width: 2px;
+    }
+  }
   .hover\:bg-neutral-200 {
     &:hover {
       @media (hover: hover) {
@@ -788,6 +797,11 @@
       @media (hover: hover) {
         text-decoration-line: underline;
       }
+    }
+  }
+  .focus\:bg-neutral-200 {
+    &:focus {
+      background-color: var(--color-neutral-200);
     }
   }
   .dark\:border-neutral-600 {
@@ -837,6 +851,13 @@
         @media (hover: hover) {
           background-color: var(--color-neutral-700);
         }
+      }
+    }
+  }
+  .dark\:focus\:bg-neutral-700 {
+    &:where(.dark, .dark *) {
+      &:focus {
+        background-color: var(--color-neutral-700);
       }
     }
   }
@@ -961,6 +982,11 @@ select > option {
 @property --tw-font-weight {
   syntax: "*";
   inherits: false;
+}
+@property --tw-outline-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
 }
 @property --tw-blur {
   syntax: "*";
