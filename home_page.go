@@ -96,6 +96,7 @@ func generateHomepageLinks() template.HTML {
 					attrs.Props{
 						attrs.Src:   ROOT_DIRECTORY + category.Icon,
 						attrs.Class: "w-6 h-6 inline mr-1",
+						attrs.Alt:   "",
 					},
 				),
 				elem.H2(attrs.Props{

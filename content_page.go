@@ -150,14 +150,13 @@ func generateSidebarElement(snippetName string, base string, level int) *elem.El
 		panic(err)
 	}
 	content := elem.Div(attrs.Props{
-		attrs.ID:    "container",
 		attrs.Class: "flex flex-col",
 	})
 
 	if level == 0 {
 		anchorElement := elem.A(
 			attrs.Props{
-				attrs.Class: "hover:bg-neutral-200 dark:hover:bg-neutral-700 px-1",
+				attrs.Class: "hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5",
 				attrs.Href:  ROOT_DIRECTORY + "/snippets/" + snippetName + "/",
 			},
 			elem.Text("readme"),
@@ -172,7 +171,7 @@ func generateSidebarElement(snippetName string, base string, level int) *elem.El
 		}
 		anchorElement := elem.A(
 			attrs.Props{
-				attrs.Class: "hover:bg-neutral-200 dark:hover:bg-neutral-700 px-1",
+				attrs.Class: "hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5",
 				attrs.Style: styles.Props{
 					styles.PaddingLeft: fmt.Sprint("calc(var(--spacing) * ", (2*level)+1, ")"),
 				}.ToInline(),

@@ -6,8 +6,8 @@
             <h1>{{.Title}}</h1>
             <a href="{{.SourceHref}}" class="text-neutral-700 dark:text-neutral-400 text-sm hover:underline">View Source</a>
         </div>
-        <button id="sidebar-toggle" class="h-8 w-8 bg-neutral-200 dark:bg-neutral-800 rounded flex items-center justify-center cursor-pointer">
-            <img id="sidebar-toggle-icon" class="h-4 w-4 dark:invert" src="{{.ROOT_DIRECTORY}}/OcSidebarcollapse2.svg">
+        <button id="sidebar-toggle" type="button" title="Toggle Sidebar" class="h-8 w-8 bg-neutral-200 dark:bg-neutral-800 rounded flex items-center justify-center cursor-pointer">
+            <img id="sidebar-toggle-icon" class="h-4 w-4 dark:invert" src="{{.ROOT_DIRECTORY}}/OcSidebarcollapse2.svg" alt="">
         </button>
     </div>
     <div class="flex flex-row p-2 flex-grow overflow-auto ">
@@ -18,8 +18,8 @@
                 <p class="whitespace-nowrap overflow-hidden overflow-ellipsis">{{.Breadcrumbs}}</p>
                 {{if not .OverviewPage}}
                 <div class="mr-3 ml-auto flex flex-row gap-2 items-center">
-                    <button type="button" id="copy-content" class="cursor-pointer">
-                        <img class="h-4 w-4 dark:invert" src="{{.ROOT_DIRECTORY}}/OcCopy2.svg">
+                    <button type="button" id="copy-content" title="Copy Content" class="cursor-pointer">
+                        <img class="h-4 w-4 dark:invert" src="{{.ROOT_DIRECTORY}}/OcCopy2.svg" alt="">
                     </button>
                     <!-- <a href="#">
                         <img class="h-4 w-4 dark:invert" src="/OcLink2.svg">

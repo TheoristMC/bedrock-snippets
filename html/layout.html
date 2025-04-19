@@ -14,13 +14,13 @@
     <script src="{{.ROOT_DIRECTORY}}/js/theme.js"></script>
     <div class="bg-neutral-100 dark:bg-neutral-800 p-2 border-b border-neutral-300 dark:border-neutral-600 flex gap-2 items-center">
         <a href="{{.ROOT_DIRECTORY}}" class="flex flex-row items-center gap-1">
-            <img class="h-8 w-8" src="{{.ROOT_DIRECTORY}}/favicon.png">
+            <img class="h-8 w-8" src="{{.ROOT_DIRECTORY}}/favicon.png" alt="">
             <h1 class="text-lg font-semibold">Bedrock Snippets</h1>
         </a>
         <div class="ml-auto mr-2">
-            <div class="bg-neutral-200 dark:bg-neutral-900 flex items-center justify-center gap-2 py-1.5 px-2 rounded">
-                <img id="theme-selector-icon" class="dark:invert" src="{{.ROOT_DIRECTORY}}/OcSun2.svg">
-                <select class="dark:bg-neutral-900 cursor-pointer" id="theme-selector">
+            <div class="bg-neutral-200 dark:bg-neutral-900 flex items-center justify-center gap-2 py-1.5 px-2 rounded focus-within:outline-2">
+                <img id="theme-selector-icon" class="dark:invert h-4 w-4" src="{{.ROOT_DIRECTORY}}/OcSun2.svg" alt="">
+                <select class="dark:bg-neutral-900 cursor-pointer" id="theme-selector" title="Theme Selector">
                     <option value="auto">
                         System
                     </option>
