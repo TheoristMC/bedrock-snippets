@@ -537,6 +537,9 @@
   .static {
     position: static;
   }
+  .sticky {
+    position: sticky;
+  }
   .bottom-6 {
     bottom: calc(var(--spacing) * 6);
   }
@@ -884,6 +887,18 @@ code {
   ul {
     list-style-position: inside;
     list-style-type: disc;
+  }
+  h1, h2 {
+    --tw-font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-semibold);
+  }
+  h1 {
+    font-size: var(--text-lg);
+    line-height: var(--tw-leading, var(--text-lg--line-height));
+  }
+  h2 {
+    font-size: var(--text-base);
+    line-height: var(--tw-leading, var(--text-base--line-height));
   }
 }
 select:focus {
