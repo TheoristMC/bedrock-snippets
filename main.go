@@ -88,10 +88,11 @@ func copyPublicFolder() error {
 
 func generateTailwindCSS() {
 	cmd := exec.Command("npx", "@tailwindcss/cli", "-i", "./main.css", "-o", "./build/main.css")
-	_, err := cmd.Output()
+
+	output, err := cmd.CombinedOutput()
 
 	if err != nil {
 		fmt.Println("Failed to generate CSS:", err.Error())
-		return
+		fmt.Println(string(output))
 	}
 }

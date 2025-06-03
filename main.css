@@ -29,6 +29,18 @@ code {
   ul {
     @apply list-disc list-inside;
   }
+
+  h1, h2 {
+    @apply font-semibold;
+  }
+
+  h1 {
+    @apply text-lg;
+  }
+
+  h2 {
+    @apply text-base;
+  }
 }
 
 select:focus {
