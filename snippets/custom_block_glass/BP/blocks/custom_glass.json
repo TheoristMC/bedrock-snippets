@@ -2,31 +2,30 @@
     "format_version": "1.21.90",
     "minecraft:block": {
         "description": {
-            "identifier": "snippets:custom_slime_block",
+            "identifier": "snippets:custom_glass",
             "menu_category": {
                 "category": "construction"
             }
         },
         "components": {
-            "minecraft:geometry": "geometry.custom_slime_block",
+            "minecraft:geometry": {
+                "identifier": "geometry.custom_glass",
+                "culling": "snippets:custom_glass_culling"
+            },
             "minecraft:material_instances": {
                 "*": {
-                    "texture": "custom_slime_block",
+                    "texture": "custom_glass",
                     "render_method": "blend"
                 }
             },
             "minecraft:destructible_by_mining": {
-                "seconds_to_destroy": 0.033
+                "seconds_to_destroy": 0.3
             },
             "minecraft:destructible_by_explosion": {
-                "explosion_resistance": 0
+                "explosion_resistance": 0.3
             },
             "minecraft:light_dampening": 0,
-            "minecraft:movable": {
-                "movement_type": "push_pull",
-                "sticky": "same"
-            },
-            "minecraft:map_color": "#7fb238"
+            "minecraft:loot": "loot_tables/empty.json"
         }
     }
 }
