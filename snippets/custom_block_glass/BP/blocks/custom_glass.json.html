@@ -52,16 +52,80 @@
         id="main-content"
         class="w-full overflow-hidden relative bg-neutral-100 rounded-l dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-600">
             <div class="absolute pl-2 pt-1 flex flex-row w-full bg-neutral-100 dark:bg-neutral-800 rounded-l">
-                <p class="whitespace-nowrap overflow-hidden overflow-ellipsis">custom_block_glass &gt; overview</p>
+                <p class="whitespace-nowrap overflow-hidden overflow-ellipsis">custom_block_glass &gt; BP &gt; blocks &gt; custom_glass.json</p>
+                
+                <div class="mr-3 ml-auto flex flex-row gap-2 items-center">
+                    <button type="button" id="copy-content" title="Copy Content" class="cursor-pointer">
+                        <img class="h-4 w-4 dark:invert" src="/bedrock-snippets/OcCopy2.svg" alt="">
+                    </button>
+                    
+                </div>
                 
             </div>
             <div
                 class="h-full overflow-y-auto overflow-x-auto grow min-h-64 p-2 pt-8 w-full">
                 
-                <div class="prose">
-                    <p>This snippet adds a custom glass block with included culling rules to hide faces that are touching.</p>
-
-                </div>
+                <div data-content-text="{
+    &#34;format_version&#34;: &#34;1.21.90&#34;,
+    &#34;minecraft:block&#34;: {
+        &#34;description&#34;: {
+            &#34;identifier&#34;: &#34;snippets:custom_glass&#34;,
+            &#34;menu_category&#34;: {
+                &#34;category&#34;: &#34;construction&#34;
+            }
+        },
+        &#34;components&#34;: {
+            &#34;minecraft:geometry&#34;: {
+                &#34;identifier&#34;: &#34;geometry.custom_glass&#34;,
+                &#34;culling&#34;: &#34;snippets:custom_glass_culling&#34;
+            },
+            &#34;minecraft:material_instances&#34;: {
+                &#34;*&#34;: {
+                    &#34;texture&#34;: &#34;custom_glass&#34;,
+                    &#34;render_method&#34;: &#34;blend&#34;
+                }
+            },
+            &#34;minecraft:destructible_by_mining&#34;: {
+                &#34;seconds_to_destroy&#34;: 0.3
+            },
+            &#34;minecraft:destructible_by_explosion&#34;: {
+                &#34;explosion_resistance&#34;: 0.3
+            },
+            &#34;minecraft:light_dampening&#34;: 0,
+            &#34;minecraft:loot&#34;: &#34;loot_tables/empty.json&#34;
+        }
+    }
+}" data-content-type="text" id="snippet-content"><pre class="chroma-chroma"><code><span class="chroma-line"><span class="chroma-cl"><span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">    <span class="chroma-nt">&#34;format_version&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;1.21.90&#34;</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">    <span class="chroma-nt">&#34;minecraft:block&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">        <span class="chroma-nt">&#34;description&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-nt">&#34;identifier&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;snippets:custom_glass&#34;</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-nt">&#34;menu_category&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;category&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;construction&#34;</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-p">}</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">        <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">        <span class="chroma-nt">&#34;components&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-nt">&#34;minecraft:geometry&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;identifier&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;geometry.custom_glass&#34;</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;culling&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;snippets:custom_glass_culling&#34;</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-nt">&#34;minecraft:material_instances&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;*&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;texture&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;custom_glass&#34;</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;render_method&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;blend&#34;</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-p">}</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-nt">&#34;minecraft:destructible_by_mining&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;seconds_to_destroy&#34;</span><span class="chroma-p">:</span> <span class="chroma-mf">0.3</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-nt">&#34;minecraft:destructible_by_explosion&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;explosion_resistance&#34;</span><span class="chroma-p">:</span> <span class="chroma-mf">0.3</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-nt">&#34;minecraft:light_dampening&#34;</span><span class="chroma-p">:</span> <span class="chroma-mi">0</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-nt">&#34;minecraft:loot&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;loot_tables/empty.json&#34;</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">        <span class="chroma-p">}</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">    <span class="chroma-p">}</span>
+</span></span><span class="chroma-line"><span class="chroma-cl"><span class="chroma-p">}</span></span></span></code></pre></div>
                 
             </div>
         </div>

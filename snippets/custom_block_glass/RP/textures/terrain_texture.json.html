@@ -52,16 +52,40 @@
         id="main-content"
         class="w-full overflow-hidden relative bg-neutral-100 rounded-l dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-600">
             <div class="absolute pl-2 pt-1 flex flex-row w-full bg-neutral-100 dark:bg-neutral-800 rounded-l">
-                <p class="whitespace-nowrap overflow-hidden overflow-ellipsis">custom_block_glass &gt; overview</p>
+                <p class="whitespace-nowrap overflow-hidden overflow-ellipsis">custom_block_glass &gt; RP &gt; textures &gt; terrain_texture.json</p>
+                
+                <div class="mr-3 ml-auto flex flex-row gap-2 items-center">
+                    <button type="button" id="copy-content" title="Copy Content" class="cursor-pointer">
+                        <img class="h-4 w-4 dark:invert" src="/bedrock-snippets/OcCopy2.svg" alt="">
+                    </button>
+                    
+                </div>
                 
             </div>
             <div
                 class="h-full overflow-y-auto overflow-x-auto grow min-h-64 p-2 pt-8 w-full">
                 
-                <div class="prose">
-                    <p>This snippet adds a custom glass block with included culling rules to hide faces that are touching.</p>
-
-                </div>
+                <div data-content-text="{
+    &#34;resource_pack_name&#34;: &#34;snippets&#34;,
+    &#34;texture_name&#34;: &#34;atlas.terrain&#34;,
+    &#34;padding&#34;: 8,
+    &#34;num_mip_levels&#34;: 4,
+    &#34;texture_data&#34;: {
+        &#34;custom_glass&#34;: {
+            &#34;textures&#34;: &#34;textures/custom_glass/glass&#34;
+        }
+    }
+}" data-content-type="text" id="snippet-content"><pre class="chroma-chroma"><code><span class="chroma-line"><span class="chroma-cl"><span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">    <span class="chroma-nt">&#34;resource_pack_name&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;snippets&#34;</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">    <span class="chroma-nt">&#34;texture_name&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;atlas.terrain&#34;</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">    <span class="chroma-nt">&#34;padding&#34;</span><span class="chroma-p">:</span> <span class="chroma-mi">8</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">    <span class="chroma-nt">&#34;num_mip_levels&#34;</span><span class="chroma-p">:</span> <span class="chroma-mi">4</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">    <span class="chroma-nt">&#34;texture_data&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">        <span class="chroma-nt">&#34;custom_glass&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-nt">&#34;textures&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;textures/custom_glass/glass&#34;</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">        <span class="chroma-p">}</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">    <span class="chroma-p">}</span>
+</span></span><span class="chroma-line"><span class="chroma-cl"><span class="chroma-p">}</span></span></span></code></pre></div>
                 
             </div>
         </div>
