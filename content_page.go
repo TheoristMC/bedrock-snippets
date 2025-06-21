@@ -46,6 +46,9 @@ func generatePagesForSnippet(snippetName string) {
 	sourceHref := REPOSITORY_ROOT + "tree/main/snippets/" + snippetName
 
 	filepath.WalkDir("snippets/"+snippetName+"/", func(path string, d fs.DirEntry, err error) error {
+		if err != nil {
+			panic(err)
+		}
 		if d.IsDir() {
 			err := os.Mkdir("build/"+path, os.ModePerm)
 
@@ -87,11 +90,12 @@ func generatePagesForSnippet(snippetName string) {
 			ROOT_DIRECTORY: ROOT_DIRECTORY,
 		}
 
-		if ext == ".json" || ext == ".material" {
+		switch ext {
+		case ".json", ".material":
 			data.TextContent = CreateJSONPreview(path)
-		} else if ext == ".png" {
+		case ".png":
 			data.TextContent = CreatePNGPreview(path)
-		} else if ext == ".md" {
+		case ".md":
 			data.TextContent = CreateMDPreview(path)
 		}
 
@@ -141,7 +145,6 @@ func generatePagesForSnippet(snippetName string) {
 	if err != nil {
 		log.Fatalf("Error executing template: %v", err)
 	}
-
 }
 
 func generateSidebarElement(snippetName string, base string, level int) *elem.Element {
@@ -208,7 +211,6 @@ func CreateJSONPreview(filePath string) template.HTML {
 	)
 
 	lexer := lexers.Get("json")
-	style, err := chroma.NewXMLStyle(strings.NewReader(""))
 
 	iterator, err := lexer.Tokenise(nil, string(content))
 	if err != nil {
@@ -216,7 +218,7 @@ func CreateJSONPreview(filePath string) template.HTML {
 	}
 
 	var result bytes.Buffer
-	err = htmlFormatter.Format(&result, style, iterator)
+	err = htmlFormatter.Format(&result, &chroma.Style{}, iterator)
 	if err != nil {
 		log.Fatal(err)
 	}
