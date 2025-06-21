@@ -29,6 +29,7 @@ type ContentPageData struct {
 
 func generatePagesForSnippet(snippetName string) {
 	dirName := "./build/snippets/" + snippetName
+	sourceHref := REPOSITORY_ROOT + "tree/main/snippets/" + snippetName
 
 	err := os.Mkdir(dirName, os.ModePerm)
 	if err != nil {
@@ -36,14 +37,11 @@ func generatePagesForSnippet(snippetName string) {
 	}
 
 	tmpl, err := template.ParseFiles("./html/layout.html", "./html/snippet.html")
-
 	if err != nil {
 		log.Fatalf("Error parsing template files: %v", err)
 	}
 
 	sidebar := generateSidebarElement(snippetName, "", 0)
-
-	sourceHref := REPOSITORY_ROOT + "tree/main/snippets/" + snippetName
 
 	filepath.WalkDir("snippets/"+snippetName+"/", func(path string, d fs.DirEntry, err error) error {
 		if err != nil {
@@ -51,7 +49,6 @@ func generatePagesForSnippet(snippetName string) {
 		}
 		if d.IsDir() {
 			err := os.Mkdir("build/"+path, os.ModePerm)
-
 			if err != nil && !os.IsExist(err) {
 				log.Fatal(err)
 			}
@@ -100,7 +97,6 @@ func generatePagesForSnippet(snippetName string) {
 		}
 
 		err = tmpl.ExecuteTemplate(outputFile, "layout.html", data)
-
 		if err != nil {
 			log.Fatalf("Error executing template: %v", err)
 		}
@@ -141,7 +137,6 @@ func generatePagesForSnippet(snippetName string) {
 	}
 
 	err = tmpl.ExecuteTemplate(indexFile, "layout.html", data)
-
 	if err != nil {
 		log.Fatalf("Error executing template: %v", err)
 	}
