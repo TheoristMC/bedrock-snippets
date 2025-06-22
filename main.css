@@ -940,7 +940,7 @@ select > option {
 .chroma-p {
   color: #000000;
 }
-.chroma-k {
+.chroma-k, .chroma-kr {
   color: #00a8c8;
 }
 .chroma-nt {
@@ -956,10 +956,19 @@ select > option {
   color: #ae81ff;
 }
 .chroma-kc {
-  color: #00a8c8;
+  color: #66d9ef;
+}
+.chroma-nx {
+  color: #000000;
+}
+.chroma-o {
+  color: #f92672;
 }
 .dark {
   .chroma-p {
+    color: #ffffff;
+  }
+  .chroma-nx {
     color: #ffffff;
   }
 }
