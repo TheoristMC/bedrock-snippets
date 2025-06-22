@@ -94,6 +94,10 @@ func generatePagesForSnippet(snippetName string) {
 			data.TextContent = CreatePNGPreview(path)
 		case ".md":
 			data.TextContent = CreateMDPreview(path)
+		case ".js", ".ts":
+			data.TextContent = CreateJSPreview(path)
+		default:
+			log.Fatalf("No preview avaliable for %s", ext)
 		}
 
 		err = tmpl.ExecuteTemplate(outputFile, "layout.html", data)
@@ -206,6 +210,42 @@ func CreateJSONPreview(filePath string) template.HTML {
 	)
 
 	lexer := lexers.Get("json")
+
+	iterator, err := lexer.Tokenise(nil, string(content))
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	var result bytes.Buffer
+	err = htmlFormatter.Format(&result, &chroma.Style{}, iterator)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	container := elem.Div(attrs.Props{
+		attrs.ID:            "snippet-content",
+		"data-content-type": "text",
+		"data-content-text": html.EscapeString(string(content)),
+	},
+		elem.Raw(result.String()),
+	)
+
+	return template.HTML(container.Render())
+}
+
+func CreateJSPreview(filePath string) template.HTML {
+	content, err := os.ReadFile(filePath)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	htmlFormatter := chromaHtmlFormatter.New(
+		chromaHtmlFormatter.LineNumbersInTable(true),
+		chromaHtmlFormatter.WithClasses(true),
+		chromaHtmlFormatter.ClassPrefix("chroma-"),
+	)
+
+	lexer := lexers.Get("ts")
 
 	iterator, err := lexer.Tokenise(nil, string(content))
 	if err != nil {

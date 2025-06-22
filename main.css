@@ -87,13 +87,16 @@ select > option {
 
 /*
   styles for chroma code snippets
-  types can be found at
+  class names can be found at
   https://github.com/alecthomas/chroma/blob/62197e9ddb9d7e7db982a71113c3b1fcdd6cbba0/types.go#L210
+
+  example style can be found at
+  https://github.com/alecthomas/chroma/blob/62197e9ddb9d7e7db982a71113c3b1fcdd6cbba0/styles/monokai.xml
 */
 .chroma-p {
   color: #000000;
 }
-.chroma-k {
+.chroma-k, .chroma-kr {
   color: #00a8c8;
 }
 .chroma-nt {
@@ -109,10 +112,19 @@ select > option {
   color: #ae81ff;
 }
 .chroma-kc {
-  color: #00a8c8;
+  color: #66d9ef;
+}
+.chroma-nx {
+  color: #000000;
+}
+.chroma-o {
+  color: #f92672;
 }
 .dark {
   .chroma-p {
+    color: #ffffff;
+  }
+  .chroma-nx {
     color: #ffffff;
   }
 }
