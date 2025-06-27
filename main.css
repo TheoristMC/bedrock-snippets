@@ -537,9 +537,6 @@
   .static {
     position: static;
   }
-  .sticky {
-    position: sticky;
-  }
   .bottom-6 {
     bottom: calc(var(--spacing) * 6);
   }
@@ -778,9 +775,6 @@
   }
   .text-white {
     color: var(--color-white);
-  }
-  .\[localhost\:8080\] {
-    localhost: 8080;
   }
   .focus-within\:outline-2 {
     &:focus-within {
