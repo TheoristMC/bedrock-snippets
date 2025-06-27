@@ -8,11 +8,14 @@
 ### Installation
 ```
 npm install
-go get
 ```
 
 ### Running
-There are three ways you can run it locally.
+Firstly, move into the website directory:
+```
+cd website
+```
+Then there are three ways you can run it locally.
 
 Build:
 ```
