@@ -23,7 +23,7 @@ func main() {
 		panic(err)
 	}
 
-	snippets, err := os.ReadDir("./snippets")
+	snippets, err := os.ReadDir(SNIPPET_DIRECTORY)
 	if err != nil {
 		panic(err)
 	}

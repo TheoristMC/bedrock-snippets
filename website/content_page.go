@@ -44,12 +44,17 @@ func generatePagesForSnippet(snippetName string) {
 
 	sidebar := generateSidebarElement(snippetName, "", 0)
 
-	filepath.WalkDir("snippets/"+snippetName+"/", func(path string, d fs.DirEntry, err error) error {
+	filepath.WalkDir(SNIPPET_DIRECTORY+"/"+snippetName+"/", func(path string, d fs.DirEntry, err error) error {
 		if err != nil {
 			panic(err)
 		}
+
+		rawPath, _ := filepath.Rel("../snippets", path)
+		ext := filepath.Ext(path)
+		outputPath := "build/snippets/" + rawPath
+
 		if d.IsDir() {
-			err := os.Mkdir("build/"+path, os.ModePerm)
+			err := os.Mkdir(outputPath, os.ModePerm)
 			if err != nil && !os.IsExist(err) {
 				panic(err)
 			}
@@ -61,15 +66,12 @@ func generatePagesForSnippet(snippetName string) {
 			return nil
 		}
 
-		outputFilePath := "build/" + path + ".html"
+		outputFilePath := outputPath + ".html"
 		outputFile, err := os.Create(outputFilePath)
 		if err != nil {
 			panic(err)
 		}
 		defer outputFile.Close()
-
-		rawPath, _ := filepath.Rel("snippets", path)
-		ext := filepath.Ext(path)
 
 		data := struct {
 			Title          string
@@ -150,7 +152,7 @@ func generatePagesForSnippet(snippetName string) {
 }
 
 func generateSidebarElement(snippetName string, base string, level int) *elem.Element {
-	contents, err := os.ReadDir("./snippets/" + snippetName + "/" + base)
+	contents, err := os.ReadDir(SNIPPET_DIRECTORY + "/" + snippetName + "/" + base)
 	if err != nil {
 		panic(err)
 	}

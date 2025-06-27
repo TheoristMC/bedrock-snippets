@@ -28,10 +28,10 @@ jobs:
       run: go get
 
     - name: Build
-      run: go run .
+      run: cd website && go run .
 
     - name: Deploy 🚀
       uses: JamesIves/github-pages-deploy-action@4.1.0
       with:
         branch: build
-        folder: build/
+        folder: website/build/

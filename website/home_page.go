@@ -55,7 +55,7 @@ func generateHomepageLinks() template.HTML {
 		attrs.Class: "flex flex-row flex-wrap gap-3 p-2",
 	})
 
-	snippets, err := os.ReadDir("./snippets")
+	snippets, err := os.ReadDir(SNIPPET_DIRECTORY)
 	if err != nil {
 		panic(err)
 	}
@@ -72,7 +72,7 @@ func generateHomepageLinks() template.HTML {
 		snippetName := e.Name()
 
 		var snippetData SnippetData
-		snippetDataJson, err := os.ReadFile("snippets/" + snippetName + "/snippet.json")
+		snippetDataJson, err := os.ReadFile(SNIPPET_DIRECTORY + "/" + snippetName + "/snippet.json")
 		if err != nil {
 			panic(`Snippet is missing a snippet.json file.`)
 		}
