@@ -33,12 +33,13 @@ func generatePagesForSnippet(snippetName string) {
 
 	err := os.Mkdir(dirName, os.ModePerm)
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 
 	tmpl, err := template.ParseFiles("./html/layout.html", "./html/snippet.html")
 	if err != nil {
-		log.Fatalf("Error parsing template files: %v", err)
+		fmt.Println("Error parsing template files")
+		panic(err)
 	}
 
 	sidebar := generateSidebarElement(snippetName, "", 0)
@@ -50,7 +51,7 @@ func generatePagesForSnippet(snippetName string) {
 		if d.IsDir() {
 			err := os.Mkdir("build/"+path, os.ModePerm)
 			if err != nil && !os.IsExist(err) {
-				log.Fatal(err)
+				panic(err)
 			}
 			return nil
 		}
@@ -102,7 +103,8 @@ func generatePagesForSnippet(snippetName string) {
 
 		err = tmpl.ExecuteTemplate(outputFile, "layout.html", data)
 		if err != nil {
-			log.Fatalf("Error executing template: %v", err)
+			fmt.Println("Error executing template")
+			panic(err)
 		}
 
 		return nil
@@ -142,7 +144,8 @@ func generatePagesForSnippet(snippetName string) {
 
 	err = tmpl.ExecuteTemplate(indexFile, "layout.html", data)
 	if err != nil {
-		log.Fatalf("Error executing template: %v", err)
+		fmt.Println("Error executing template")
+		panic(err)
 	}
 }
 
@@ -200,7 +203,7 @@ func generateSidebarElement(snippetName string, base string, level int) *elem.El
 func CreateJSONPreview(filePath string) template.HTML {
 	content, err := os.ReadFile(filePath)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalln("Unable to read file.", err)
 	}
 
 	htmlFormatter := chromaHtmlFormatter.New(
@@ -213,13 +216,13 @@ func CreateJSONPreview(filePath string) template.HTML {
 
 	iterator, err := lexer.Tokenise(nil, string(content))
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 
 	var result bytes.Buffer
 	err = htmlFormatter.Format(&result, &chroma.Style{}, iterator)
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 
 	container := elem.Div(attrs.Props{
@@ -236,7 +239,7 @@ func CreateJSONPreview(filePath string) template.HTML {
 func CreateJSPreview(filePath string) template.HTML {
 	content, err := os.ReadFile(filePath)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalln("Unable to read file.", err)
 	}
 
 	htmlFormatter := chromaHtmlFormatter.New(
@@ -249,13 +252,13 @@ func CreateJSPreview(filePath string) template.HTML {
 
 	iterator, err := lexer.Tokenise(nil, string(content))
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 
 	var result bytes.Buffer
 	err = htmlFormatter.Format(&result, &chroma.Style{}, iterator)
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 
 	container := elem.Div(attrs.Props{
@@ -272,7 +275,7 @@ func CreateJSPreview(filePath string) template.HTML {
 func CreatePNGPreview(filePath string) template.HTML {
 	content, err := os.ReadFile(filePath)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalln("Unable to read file.", err)
 	}
 
 	imgBase64Str := base64.StdEncoding.EncodeToString(content)
@@ -285,7 +288,7 @@ func CreatePNGPreview(filePath string) template.HTML {
 func CreateMDPreview(filePath string) template.HTML {
 	indexFileContent, err := os.ReadFile(filePath)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalln("Unable to read file.", err)
 	}
 
 	renderedIndexFileContent := mdToHTML([]byte(indexFileContent))

@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net"
 	"net/http"
 	"os"
@@ -50,6 +49,6 @@ func runDevServer() {
 
 	fmt.Printf("serving static files from %s on http://localhost%s\n", staticDir, port)
 	if err := http.ListenAndServe(port, nil); err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 }

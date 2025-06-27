@@ -2,8 +2,8 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"html/template"
-	"log"
 	"os"
 
 	"github.com/chasefleming/elem-go"
@@ -15,7 +15,8 @@ func generateHomepage() {
 
 	tmpl, err := template.ParseFiles("./html/layout.html", "./html/home.html")
 	if err != nil {
-		log.Fatalf("Error parsing template files: %v", err)
+		fmt.Println("Error parsing template files")
+		panic(err)
 	}
 	outputFile, err := os.Create("build/index.html")
 	if err != nil {
@@ -39,7 +40,8 @@ func generateHomepage() {
 	)
 
 	if err != nil {
-		log.Fatalf("Error executing template: %v", err)
+		fmt.Println("Error executing template")
+		panic(err)
 	}
 }
 

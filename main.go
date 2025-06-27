@@ -20,7 +20,7 @@ func main() {
 	}
 
 	if err = os.Mkdir("./build/snippets/", os.ModePerm); err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 
 	snippets, err := os.ReadDir("./snippets")
@@ -92,7 +92,6 @@ func generateTailwindCSS() {
 	output, err := cmd.CombinedOutput()
 
 	if err != nil {
-		fmt.Println("Failed to generate CSS:", err.Error())
-		fmt.Println(string(output))
+		log.Fatalln("Failed to generate CSS:", err.Error(), "\n", string(output))
 	}
 }
