@@ -24,8 +24,8 @@ jobs:
     - name: Install npm packages
       run: npm install
 
-    - name: Install go packages
-      run: go get
+    # - name: Install go packages
+    #   run: go get
 
     - name: Build
       run: cd website && go run .
