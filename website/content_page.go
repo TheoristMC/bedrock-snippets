@@ -119,7 +119,7 @@ func generatePagesForSnippet(snippetName string) {
 	}
 	defer indexFile.Close()
 
-	indexFileContent, err := os.ReadFile("snippets/" + snippetName + "/snippet.md")
+	indexFileContent, err := os.ReadFile(SNIPPET_DIRECTORY + "/" + snippetName + "/snippet.md")
 	if err != nil {
 		indexFileContent = []byte(`This snippet is missing a snippet.md file.`)
 	}
