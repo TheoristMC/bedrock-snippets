@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/bedrock-snippets/favicon.png">
+    <title>Bedrock Snippets: Custom Attachable Item Models</title>
+    <link href="/bedrock-snippets/main.css" rel="stylesheet">
+    <script>var ROOT_DIRECTORY = "/bedrock-snippets"</script>
+</head>
+
+<body class="dark:bg-neutral-900 dark:text-white dark:fill-white flex flex-col h-[100dvh]">
+    <script src="/bedrock-snippets/js/theme.js"></script>
+    <div class="bg-neutral-100 dark:bg-neutral-800 p-2 border-b border-neutral-300 dark:border-neutral-600 flex gap-2 items-center">
+        <a href="/bedrock-snippets" class="flex flex-row items-center gap-1">
+            <img class="h-8 w-8" src="/bedrock-snippets/favicon.png" alt="">
+            <h1 class="text-lg font-semibold">Bedrock Snippets</h1>
+        </a>
+        <div class="ml-auto mr-2">
+            <div class="bg-neutral-200 dark:bg-neutral-900 flex items-center justify-center gap-2 py-1.5 px-2 rounded focus-within:outline-2">
+                <img id="theme-selector-icon" class="dark:invert h-4 w-4" src="/bedrock-snippets/OcSun2.svg" alt="">
+                <select class="dark:bg-neutral-900 cursor-pointer" id="theme-selector" title="Theme Selector">
+                    <option value="auto">
+                        System
+                    </option>
+                    <option value="light">
+                        Light
+                    </option>
+                    <option value="dark">
+                        Dark
+                    </option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    
+<div class="flex flex-col overflow-auto flex-grow">
+
+    <div class="p-2 pb-0 flex justify-between items-center">
+        <div>
+            <h1>Custom Attachable Item Models</h1>
+            <a href="https://github.com/bedrock-oss/bedrock-examples/tree/main/resources/custom_item_models_attachable" class="text-neutral-700 dark:text-neutral-400 text-sm hover:underline">View Source</a>
+        </div>
+        <button id="sidebar-toggle" type="button" title="Toggle Sidebar" class="h-8 w-8 bg-neutral-200 dark:bg-neutral-800 rounded flex items-center justify-center cursor-pointer">
+            <img id="sidebar-toggle-icon" class="h-4 w-4 dark:invert" src="/bedrock-snippets/OcSidebarcollapse2.svg" alt="">
+        </button>
+    </div>
+    <div class="flex flex-row p-2 flex-grow overflow-auto ">
+        <div
+        id="main-content"
+        class="w-full overflow-hidden relative bg-neutral-100 rounded-l dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-600">
+            <div class="absolute pl-2 pt-1 flex flex-row w-full bg-neutral-100 dark:bg-neutral-800 rounded-l">
+                <p class="whitespace-nowrap overflow-hidden overflow-ellipsis">custom_item_models_attachable &gt; rp &gt; textures &gt; blocks &gt; geysercmd &gt; gmdl_1.png</p>
+                
+                <div class="mr-3 ml-auto flex flex-row gap-2 items-center">
+                    <button type="button" id="copy-content" title="Copy Content" class="cursor-pointer">
+                        <img class="h-4 w-4 dark:invert" src="/bedrock-snippets/OcCopy2.svg" alt="">
+                    </button>
+                    
+                </div>
+                
+            </div>
+            <div
+                class="h-full overflow-y-auto overflow-x-auto grow min-h-64 p-2 pt-8 w-full">
+                
+                <img id="snippet-content" data-content-type="image" class="preview-image" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAY1BMVEVHcEwNeIkCAwcOeYrXZZAoKpApK5HWZI/XZpH////3/v4eisgCAwbw/f0BAgYfi8kNd4geiccgi8kDBAnXZ5HVZI4eicbVZI8QeYooKo8qLJEeiMYNeIghi8nUZI7XZpAeisdV3kMoAAAAIXRSTlMA//////////////////////////////////////////9G9E6kAAAACXBIWXMAAAsTAAALEwEAmpwYAAAFGmlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNi4wLWMwMDIgNzkuMTY0NDYwLCAyMDIwLzA1LzEyLTE2OjA0OjE3ICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIgeG1sbnM6cGhvdG9zaG9wPSJodHRwOi8vbnMuYWRvYmUuY29tL3Bob3Rvc2hvcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgMjEuMiAoTWFjaW50b3NoKSIgeG1wOkNyZWF0ZURhdGU9IjIwMjEtMDMtMDNUMTI6MTU6NTctMDg6MDAiIHhtcDpNb2RpZnlEYXRlPSIyMDIxLTAzLTEwVDAyOjQ4OjU2LTA4OjAwIiB4bXA6TWV0YWRhdGFEYXRlPSIyMDIxLTAzLTEwVDAyOjQ4OjU2LTA4OjAwIiBkYzpmb3JtYXQ9ImltYWdlL3BuZyIgcGhvdG9zaG9wOkNvbG9yTW9kZT0iMiIgcGhvdG9zaG9wOklDQ1Byb2ZpbGU9InNSR0IgSUVDNjE5NjYtMi4xIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOmVjMzBjNThjLTdjNmYtNDlkOC05N2NmLTI2ODE3ZWJjMmQ4OSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDplYzMwYzU4Yy03YzZmLTQ5ZDgtOTdjZi0yNjgxN2ViYzJkODkiIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDplYzMwYzU4Yy03YzZmLTQ5ZDgtOTdjZi0yNjgxN2ViYzJkODkiPiA8eG1wTU06SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJjcmVhdGVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOmVjMzBjNThjLTdjNmYtNDlkOC05N2NmLTI2ODE3ZWJjMmQ4OSIgc3RFdnQ6d2hlbj0iMjAyMS0wMy0wM1QxMjoxNTo1Ny0wODowMCIgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWRvYmUgUGhvdG9zaG9wIDIxLjIgKE1hY2ludG9zaCkiLz4gPC9yZGY6U2VxPiA8L3htcE1NOkhpc3Rvcnk+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+TPpbHgAAADFJREFUSIntyyEOACAQBLGDQALq/v9b/Bj8ZupbDRsmlMEQHC4MOGAwJIcF9WMw5IYHeE4sAUeOJyYAAAAASUVORK5CYII=" >
+                
+            </div>
+        </div>
+
+        <div
+            id="sidebar"
+            class="w-64 bg-neutral-100 dark:bg-neutral-800 border-r border-t border-b border-neutral-300 dark:border-neutral-600 rounded-r flex flex-col text-sm">
+            <div class="border-b border-neutral-300 dark:border-neutral-600 flex flex-row w-full items-center">
+                <p class="px-1 my-1 mx-1 font-semibold">Custom Attachable Item Models</p>
+                
+            </div>
+            <div class="flex flex-col overflow-auto">
+                <div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/custom_item_models_attachable/">readme</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 1);">bp</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 3);">blocks</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 5);">geysercmd</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/custom_item_models_attachable/bp/blocks/geysercmd/gmdl_1.json" style="padding-left: calc(var(--spacing) * 7);">gmdl_1.json</a></div></div><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/custom_item_models_attachable/bp/manifest.json" style="padding-left: calc(var(--spacing) * 3);">manifest.json</a></div><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 1);">rp</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 3);">animations</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 5);">geysercmd</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/custom_item_models_attachable/rp/animations/geysercmd/disable.animation.json" style="padding-left: calc(var(--spacing) * 7);">disable.animation.json</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/custom_item_models_attachable/rp/animations/geysercmd/gmdl_1.animation.json" style="padding-left: calc(var(--spacing) * 7);">gmdl_1.animation.json</a></div></div><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 3);">attachables</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 5);">geysercmd</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/custom_item_models_attachable/rp/attachables/geysercmd/gmdl_1.json" style="padding-left: calc(var(--spacing) * 7);">gmdl_1.json</a></div></div><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/custom_item_models_attachable/rp/manifest.json" style="padding-left: calc(var(--spacing) * 3);">manifest.json</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 3);">models</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 5);">blocks</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 7);">geysercmd</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/custom_item_models_attachable/rp/models/blocks/geysercmd/gmdl_1.geo.json" style="padding-left: calc(var(--spacing) * 9);">gmdl_1.geo.json</a></div></div></div><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 3);">texts</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/custom_item_models_attachable/rp/texts/en_GB.lang" style="padding-left: calc(var(--spacing) * 5);">en_GB.lang</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/custom_item_models_attachable/rp/texts/en_US.lang" style="padding-left: calc(var(--spacing) * 5);">en_US.lang</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/custom_item_models_attachable/rp/texts/languages.json" style="padding-left: calc(var(--spacing) * 5);">languages.json</a></div><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 3);">textures</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 5);">blocks</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 7);">geysercmd</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/custom_item_models_attachable/rp/textures/blocks/geysercmd/gmdl_1.png" style="padding-left: calc(var(--spacing) * 9);">gmdl_1.png</a></div></div><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/custom_item_models_attachable/rp/textures/terrain_texture.json" style="padding-left: calc(var(--spacing) * 5);">terrain_texture.json</a></div></div></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="flex justify-center w-full fixed bottom-6">
+    <span id="toast" class="bg-black text-white rounded px-2 py-1">
+        Copied to Clipboard
+        </spa>
+</div>
+
+<script src="/bedrock-snippets/js/copy.js" module></script>
+<script src="/bedrock-snippets/js/sidebar.js" module></script>
+
+
+    <script src="/bedrock-snippets/js/preload.js" type="module"></script>
+</body>
+
+</html>

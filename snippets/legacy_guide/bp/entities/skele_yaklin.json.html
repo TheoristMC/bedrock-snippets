@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/bedrock-snippets/favicon.png">
+    <title>Bedrock Snippets: </title>
+    <link href="/bedrock-snippets/main.css" rel="stylesheet">
+    <script>var ROOT_DIRECTORY = "/bedrock-snippets"</script>
+</head>
+
+<body class="dark:bg-neutral-900 dark:text-white dark:fill-white flex flex-col h-[100dvh]">
+    <script src="/bedrock-snippets/js/theme.js"></script>
+    <div class="bg-neutral-100 dark:bg-neutral-800 p-2 border-b border-neutral-300 dark:border-neutral-600 flex gap-2 items-center">
+        <a href="/bedrock-snippets" class="flex flex-row items-center gap-1">
+            <img class="h-8 w-8" src="/bedrock-snippets/favicon.png" alt="">
+            <h1 class="text-lg font-semibold">Bedrock Snippets</h1>
+        </a>
+        <div class="ml-auto mr-2">
+            <div class="bg-neutral-200 dark:bg-neutral-900 flex items-center justify-center gap-2 py-1.5 px-2 rounded focus-within:outline-2">
+                <img id="theme-selector-icon" class="dark:invert h-4 w-4" src="/bedrock-snippets/OcSun2.svg" alt="">
+                <select class="dark:bg-neutral-900 cursor-pointer" id="theme-selector" title="Theme Selector">
+                    <option value="auto">
+                        System
+                    </option>
+                    <option value="light">
+                        Light
+                    </option>
+                    <option value="dark">
+                        Dark
+                    </option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    
+<div class="flex flex-col overflow-auto flex-grow">
+
+    <div class="p-2 pb-0 flex justify-between items-center">
+        <div>
+            <h1></h1>
+            <a href="https://github.com/bedrock-oss/bedrock-examples/tree/main/resources/legacy_guide" class="text-neutral-700 dark:text-neutral-400 text-sm hover:underline">View Source</a>
+        </div>
+        <button id="sidebar-toggle" type="button" title="Toggle Sidebar" class="h-8 w-8 bg-neutral-200 dark:bg-neutral-800 rounded flex items-center justify-center cursor-pointer">
+            <img id="sidebar-toggle-icon" class="h-4 w-4 dark:invert" src="/bedrock-snippets/OcSidebarcollapse2.svg" alt="">
+        </button>
+    </div>
+    <div class="flex flex-row p-2 flex-grow overflow-auto ">
+        <div
+        id="main-content"
+        class="w-full overflow-hidden relative bg-neutral-100 rounded-l dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-600">
+            <div class="absolute pl-2 pt-1 flex flex-row w-full bg-neutral-100 dark:bg-neutral-800 rounded-l">
+                <p class="whitespace-nowrap overflow-hidden overflow-ellipsis">legacy_guide &gt; bp &gt; entities &gt; skele_yaklin.json</p>
+                
+                <div class="mr-3 ml-auto flex flex-row gap-2 items-center">
+                    <button type="button" id="copy-content" title="Copy Content" class="cursor-pointer">
+                        <img class="h-4 w-4 dark:invert" src="/bedrock-snippets/OcCopy2.svg" alt="">
+                    </button>
+                    
+                </div>
+                
+            </div>
+            <div
+                class="h-full overflow-y-auto overflow-x-auto grow min-h-64 p-2 pt-8 w-full">
+                
+                <div data-content-text="//BP/entities/skele_yaklin.json
+//It&#39;s reommended to change your language setting from `json` to `jsonc`[bottom right corner] in order for the comments not to display as errors.
+{
+    &#34;format_version&#34;: &#34;1.14.0&#34;,
+    &#34;minecraft:entity&#34;: {
+        &#34;description&#34;: {
+            &#34;identifier&#34;: &#34;tut:skele_yaklin&#34;,
+            &#34;is_spawnable&#34;: true,
+            &#34;is_summonable&#34;: true,
+            &#34;is_experimental&#34;: false
+        },
+        //Component groups can be added and removed by events
+        &#34;component_groups&#34;: {
+            //baby variation
+            &#34;tut:baby&#34;: {
+                &#34;minecraft:is_baby&#34;: {},
+                //the baby entity is smaller then normal
+                &#34;minecraft:scale&#34;: {
+                    &#34;value&#34;: 0.5
+                },
+                //it can grow up
+                &#34;minecraft:ageable&#34;: {
+                    &#34;duration&#34;: 1200,
+                    &#34;feedItems&#34;: [
+                        &#34;tut:meal&#34;
+                    ],
+                    &#34;grow_up&#34;: {
+                        &#34;event&#34;: &#34;minecraft:ageable_grow_up&#34;,
+                        &#34;target&#34;: &#34;self&#34;
+                    }
+                },
+                //it follow an adult entity of the same type
+                &#34;minecraft:behavior.follow_parent&#34;: {
+                    &#34;priority&#34;: 5,
+                    &#34;speed_multiplier&#34;: 1.1
+                }
+            },
+            //adult variation
+            &#34;tut:adult&#34;: {
+                //milkable
+                &#34;minecraft:interact&#34;: {
+                    &#34;interactions&#34;: [
+                        {
+                            &#34;on_interact&#34;: {
+                                &#34;filters&#34;: {
+                                    &#34;all_of&#34;: [
+                                        {
+                                            &#34;test&#34;: &#34;is_family&#34;,
+                                            &#34;subject&#34;: &#34;other&#34;,
+                                            &#34;value&#34;: &#34;player&#34;
+                                        },
+                                        {
+                                            &#34;test&#34;: &#34;has_equipment&#34;,
+                                            &#34;domain&#34;: &#34;hand&#34;,
+                                            &#34;subject&#34;: &#34;other&#34;,
+                                            &#34;value&#34;: &#34;bucket:0&#34;
+                                        }
+                                    ]
+                                }
+                            },
+                            &#34;use_item&#34;: true,
+                            &#34;transform_to_item&#34;: &#34;bucket:1&#34;,
+                            &#34;play_sounds&#34;: &#34;milk&#34;,
+                            &#34;interact_text&#34;: &#34;action.interact.milk&#34;
+                        }
+                    ]
+                },
+                //what the mob drops. Defined in `BP/loot_tables/entities/skele_yaklin.json` in this scenario
+                &#34;minecraft:loot&#34;: {
+                    &#34;table&#34;: &#34;loot_tables/entities/skele_yaklin.json&#34;
+                },
+                //how much xp the mob drops
+                &#34;minecraft:experience_reward&#34;: {
+                    &#34;on_bred&#34;: &#34;Math.Random(1,7)&#34;,
+                    &#34;on_death&#34;: &#34;query.last_hit_by_player ? Math.Random(1,3) : 0&#34;
+                },
+                //You can breed this mob
+                &#34;minecraft:breedable&#34;: {
+                    &#34;requireTame&#34;: false,
+                    &#34;breedsWith&#34;: {
+                        &#34;mateType&#34;: &#34;tut:skele_yaklin&#34;,
+                        &#34;babyType&#34;: &#34;tut:skele_yaklin&#34;,
+                        &#34;breed_event&#34;: {
+                            &#34;event&#34;: &#34;minecraft:entity_born&#34;,
+                            &#34;target&#34;: &#34;baby&#34;
+                        }
+                    },
+                    &#34;breedItems&#34;: [
+                        &#34;tut:meal&#34;
+                    ]
+                },
+                &#34;minecraft:behavior.breed&#34;: {
+                    &#34;priority&#34;: 3,
+                    &#34;speed_multiplier&#34;: 1.0
+                }
+            },
+            //this component group gets added by default in entity_spawned and entity_born events.
+            &#34;tut:wild&#34;: {
+                //make the entity attack back
+                &#34;minecraft:behavior.hurt_by_target&#34;: {
+                    &#34;priority&#34;: 1
+                },
+                //how much damage the entity deals
+                &#34;minecraft:attack&#34;: {
+                    &#34;damage&#34;: 6,
+                    &#34;effect_name&#34;: &#34;weakness&#34;,
+                    &#34;effect_duration&#34;: 10
+                },
+                //attack AI type
+                &#34;minecraft:behavior.melee_attack&#34;: {
+                    &#34;priority&#34;: 3,
+                    &#34;speed_multiplier&#34;: 1.1,
+                    &#34;track_target&#34;: false
+                },
+                //chose targets
+                &#34;minecraft:behavior.nearest_attackable_target&#34;: {
+                    &#34;priority&#34;: 1,
+                    &#34;within_radius&#34;: 2,
+                    &#34;reselect_targets&#34;: true,
+                    &#34;entity_types&#34;: [
+                        {
+                            &#34;filters&#34;: {
+                                &#34;any_of&#34;: [
+                                    {
+                                        &#34;test&#34;: &#34;is_family&#34;,
+                                        &#34;subject&#34;: &#34;other&#34;,
+                                        &#34;value&#34;: &#34;endermite&#34;
+                                    },
+                                    {
+                                        &#34;test&#34;: &#34;is_family&#34;,
+                                        &#34;subject&#34;: &#34;other&#34;,
+                                        &#34;value&#34;: &#34;silverfish&#34;
+                                    }
+                                ]
+                            },
+                            &#34;max_dist&#34;: 35
+                        },
+                        {
+                            &#34;filters&#34;: {
+                                &#34;any_of&#34;: [
+                                    {
+                                        &#34;test&#34;: &#34;is_family&#34;,
+                                        &#34;subject&#34;: &#34;other&#34;,
+                                        &#34;value&#34;: &#34;skeleton_horse&#34;
+                                    }
+                                ]
+                            },
+                            &#34;max_dist&#34;: 64,
+                            &#34;must_see&#34;: false
+                        }
+                    ],
+                    &#34;must_see&#34;: true,
+                    &#34;must_see_forget_duration&#34;: 17
+                },
+                &#34;minecraft:tameable&#34;: {
+                    &#34;probability&#34;: 0.33,
+                    &#34;tame_items&#34;: &#34;minecraft:rotten_flesh&#34;,
+                    &#34;tame_event&#34;: {
+                        &#34;event&#34;: &#34;minecraft:on_tame&#34;,
+                        &#34;target&#34;: &#34;self&#34;
+                    }
+                }
+            },
+            //this gets added when the entitiy gets tamed in &#34;minecraft:on_tame&#34; event
+            &#34;tut:tamed&#34;: {
+                //rideable
+                &#34;minecraft:horse.jump_strength&#34;: {
+                    &#34;value&#34;: {
+                        &#34;range_min&#34;: 0.4,
+                        &#34;range_max&#34;: 1.5
+                    }
+                },
+                &#34;minecraft:is_saddled&#34;: {},
+                &#34;minecraft:input_ground_controlled&#34;: {},
+                &#34;minecraft:can_power_jump&#34;: {},
+                &#34;minecraft:behavior.player_ride_tamed&#34;: {},
+                &#34;minecraft:is_tamed&#34;: {},
+                &#34;minecraft:rideable&#34;: {
+                    &#34;priority&#34;: 0,
+                    &#34;seat_count&#34;: 1,
+                    &#34;crouching_skip_interact&#34;: true,
+                    &#34;family_types&#34;: [
+                        &#34;player&#34;
+                    ],
+                    &#34;interact_text&#34;: &#34;Ride the Skele Yaklin&#34;,
+                    &#34;seats&#34;: {
+                        &#34;position&#34;: [
+                            0.0,
+                            1.1,
+                            -0.2
+                        ]
+                    }
+                },
+                //inventory
+                &#34;minecraft:inventory&#34;: {
+                    &#34;inventory_size&#34;: 16,
+                    &#34;container_type&#34;: &#34;horse&#34;
+                }
+            },
+            &#34;tut:red&#34;: {
+                &#34;minecraft:variant&#34;: {
+                    &#34;value&#34;: 0
+                }
+            },
+            &#34;tut:arctic&#34;: {
+                &#34;minecraft:variant&#34;: {
+                    &#34;value&#34;: 1
+                }
+            }
+        },
+        //Components are applied to the entity by default and cannot be removed
+        &#34;components&#34;: {
+            //the family type for filters
+            &#34;minecraft:type_family&#34;: {
+                &#34;family&#34;: [
+                    &#34;yaklin&#34;,
+                    &#34;skeleton_yaklin&#34;,
+                    &#34;neutral&#34;,
+                    &#34;nether_mob&#34;
+                ]
+            },
+            &#34;minecraft:breathable&#34;: {
+                &#34;totalSupply&#34;: 15,
+                &#34;suffocateTime&#34;: 0
+            },
+            //hitbox/shadow
+            &#34;minecraft:collision_box&#34;: {
+                &#34;width&#34;: 1.0,
+                &#34;height&#34;: 0.8
+            },
+            //health, speed and some other self-explainable properties
+            &#34;minecraft:nameable&#34;: {},
+            &#34;minecraft:health&#34;: {
+                &#34;value&#34;: 26,
+                &#34;max&#34;: 30
+            },
+            &#34;minecraft:movement&#34;: {
+                &#34;value&#34;: 0.20
+            },
+            &#34;minecraft:leashable&#34;: {},
+            //How the mob navigates
+            &#34;minecraft:navigation.walk&#34;: {
+                &#34;can_path_over_water&#34;: true,
+                &#34;avoid_damage_blocks&#34;: true
+            },
+            &#34;minecraft:movement.basic&#34;: {},
+            &#34;minecraft:jump.static&#34;: {},
+            //A mob panics when hit
+            &#34;minecraft:behavior.panic&#34;: {
+                &#34;priority&#34;: 1,
+                &#34;speed_multiplier&#34;: 1.5
+            },
+            //The mob will go to the player who holds the items which tempt it
+            &#34;minecraft:behavior.tempt&#34;: {
+                &#34;priority&#34;: 4,
+                &#34;speed_multiplier&#34;: 1.0,
+                &#34;items&#34;: [
+                    &#34;tut:meal&#34;
+                ]
+            },
+            //random walk around
+            &#34;minecraft:behavior.random_stroll&#34;: {
+                &#34;priority&#34;: 6,
+                &#34;speed_multiplier&#34;: 1.0
+            },
+            &#34;minecraft:behavior.look_at_player&#34;: {
+                &#34;priority&#34;: 7,
+                &#34;look_distance&#34;: 6.0,
+                &#34;probability&#34;: 0.02
+            },
+            &#34;minecraft:behavior.random_look_around&#34;: {
+                &#34;priority&#34;: 8
+            },
+            //necessary, otherwise the mob will just fall through bedrock
+            &#34;minecraft:physics&#34;: {}
+        },
+        &#34;events&#34;: {
+            //This events gets applied whenewer a new entity is added.
+            &#34;minecraft:entity_spawned&#34;: {
+                //Every object in the &#34;sequence&#34; array will be run.
+                &#34;sequence&#34;: [
+                    {
+                        //either the adult or the baby variant gets randomly chosen, along with the &#34;wild&#34; variation
+                        &#34;randomize&#34;: [
+                            {
+                                &#34;weight&#34;: 55,
+                                &#34;remove&#34;: {},
+                                &#34;add&#34;: {
+                                    &#34;component_groups&#34;: [
+                                        &#34;tut:adult&#34;,
+                                        &#34;tut:wild&#34;
+                                    ]
+                                }
+                            },
+                            {
+                                &#34;weight&#34;: 5,
+                                &#34;remove&#34;: {},
+                                &#34;add&#34;: {
+                                    &#34;component_groups&#34;: [
+                                        &#34;tut:baby&#34;,
+                                        &#34;tut:wild&#34;
+                                    ]
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        &#34;randomize&#34;: [
+                            {
+                                &#34;weight&#34;: 56,
+                                &#34;add&#34;: {
+                                    &#34;component_groups&#34;: [
+                                        &#34;tut:red&#34;
+                                    ]
+                                }
+                            },
+                            {
+                                &#34;weight&#34;: 15,
+                                &#34;add&#34;: {
+                                    &#34;component_groups&#34;: [
+                                        &#34;tut:arctic&#34;
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            //this event fires on the baby entity from the &#34;minecraft:breedable&#34; component above
+            &#34;minecraft:entity_born&#34;: {
+                &#34;remove&#34;: {},
+                &#34;add&#34;: {
+                    &#34;component_groups&#34;: [
+                        &#34;tut:baby&#34;,
+                        &#34;tut:wild&#34;
+                    ]
+                }
+            },
+            //this gets fired on a baby entity which grows up in &#34;minecraft:agable:grow_up&#34;
+            &#34;minecraft:ageable_grow_up&#34;: {
+                &#34;remove&#34;: {
+                    &#34;component_groups&#34;: [
+                        &#34;tut:baby&#34;
+                    ]
+                },
+                &#34;add&#34;: {
+                    &#34;component_groups&#34;: [
+                        &#34;tut:adult&#34;
+                    ]
+                }
+            },
+            //this events gets fired on the wil entity that gets tamed in &#34;minecraft:tamable&#34; - it removes the &#34;wild&#34; component group and adds the &#34;tamed&#34; one.
+            &#34;minecraft:on_tame&#34;: {
+                &#34;remove&#34;: {
+                    &#34;component_groups&#34;: [
+                        &#34;tut:wild&#34;
+                    ]
+                },
+                &#34;add&#34;: {
+                    &#34;component_groups&#34;: [
+                        &#34;tut:tamed&#34;
+                    ]
+                }
+            }
+        }
+    }
+}" data-content-type="text" id="snippet-content"><pre class="chroma-chroma"><code><span class="chroma-line"><span class="chroma-cl"><span class="chroma-c1">//BP/entities/skele_yaklin.json
+</span></span></span><span class="chroma-line"><span class="chroma-cl"><span class="chroma-c1"></span><span class="chroma-c1">//It&#39;s reommended to change your language setting from `json` to `jsonc`[bottom right corner] in order for the comments not to display as errors.
+</span></span></span><span class="chroma-line"><span class="chroma-cl"><span class="chroma-c1"></span><span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">    <span class="chroma-nt">&#34;format_version&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;1.14.0&#34;</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">    <span class="chroma-nt">&#34;minecraft:entity&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">        <span class="chroma-nt">&#34;description&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-nt">&#34;identifier&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;tut:skele_yaklin&#34;</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-nt">&#34;is_spawnable&#34;</span><span class="chroma-p">:</span> <span class="chroma-kc">true</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-nt">&#34;is_summonable&#34;</span><span class="chroma-p">:</span> <span class="chroma-kc">true</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-nt">&#34;is_experimental&#34;</span><span class="chroma-p">:</span> <span class="chroma-kc">false</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">        <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">        <span class="chroma-c1">//Component groups can be added and removed by events
+</span></span></span><span class="chroma-line"><span class="chroma-cl"><span class="chroma-c1"></span>        <span class="chroma-nt">&#34;component_groups&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-c1">//baby variation
+</span></span></span><span class="chroma-line"><span class="chroma-cl"><span class="chroma-c1"></span>            <span class="chroma-nt">&#34;tut:baby&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;minecraft:is_baby&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span><span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-c1">//the baby entity is smaller then normal
+</span></span></span><span class="chroma-line"><span class="chroma-cl"><span class="chroma-c1"></span>                <span class="chroma-nt">&#34;minecraft:scale&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;value&#34;</span><span class="chroma-p">:</span> <span class="chroma-mf">0.5</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-c1">//it can grow up
+</span></span></span><span class="chroma-line"><span class="chroma-cl"><span class="chroma-c1"></span>                <span class="chroma-nt">&#34;minecraft:ageable&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;duration&#34;</span><span class="chroma-p">:</span> <span class="chroma-mi">1200</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;feedItems&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">[</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                        <span class="chroma-s2">&#34;tut:meal&#34;</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-p">]</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;grow_up&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                        <span class="chroma-nt">&#34;event&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;minecraft:ageable_grow_up&#34;</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                        <span class="chroma-nt">&#34;target&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;self&#34;</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-p">}</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-c1">//it follow an adult entity of the same type
+</span></span></span><span class="chroma-line"><span class="chroma-cl"><span class="chroma-c1"></span>                <span class="chroma-nt">&#34;minecraft:behavior.follow_parent&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;priority&#34;</span><span class="chroma-p">:</span> <span class="chroma-mi">5</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;speed_multiplier&#34;</span><span class="chroma-p">:</span> <span class="chroma-mf">1.1</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-p">}</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-c1">//adult variation
+</span></span></span><span class="chroma-line"><span class="chroma-cl"><span class="chroma-c1"></span>            <span class="chroma-nt">&#34;tut:adult&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-c1">//milkable
+</span></span></span><span class="chroma-line"><span class="chroma-cl"><span class="chroma-c1"></span>                <span class="chroma-nt">&#34;minecraft:interact&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;interactions&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">[</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                        <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                            <span class="chroma-nt">&#34;on_interact&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                <span class="chroma-nt">&#34;filters&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                    <span class="chroma-nt">&#34;all_of&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">[</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                        <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                            <span class="chroma-nt">&#34;test&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;is_family&#34;</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                            <span class="chroma-nt">&#34;subject&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;other&#34;</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                            <span class="chroma-nt">&#34;value&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;player&#34;</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                        <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                        <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                            <span class="chroma-nt">&#34;test&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;has_equipment&#34;</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                            <span class="chroma-nt">&#34;domain&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;hand&#34;</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                            <span class="chroma-nt">&#34;subject&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;other&#34;</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                            <span class="chroma-nt">&#34;value&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;bucket:0&#34;</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                        <span class="chroma-p">}</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                    <span class="chroma-p">]</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                <span class="chroma-p">}</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                            <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                            <span class="chroma-nt">&#34;use_item&#34;</span><span class="chroma-p">:</span> <span class="chroma-kc">true</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                            <span class="chroma-nt">&#34;transform_to_item&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;bucket:1&#34;</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                            <span class="chroma-nt">&#34;play_sounds&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;milk&#34;</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                            <span class="chroma-nt">&#34;interact_text&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;action.interact.milk&#34;</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                        <span class="chroma-p">}</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-p">]</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-c1">//what the mob drops. Defined in `BP/loot_tables/entities/skele_yaklin.json` in this scenario
+</span></span></span><span class="chroma-line"><span class="chroma-cl"><span class="chroma-c1"></span>                <span class="chroma-nt">&#34;minecraft:loot&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;table&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;loot_tables/entities/skele_yaklin.json&#34;</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-c1">//how much xp the mob drops
+</span></span></span><span class="chroma-line"><span class="chroma-cl"><span class="chroma-c1"></span>                <span class="chroma-nt">&#34;minecraft:experience_reward&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;on_bred&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;Math.Random(1,7)&#34;</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;on_death&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;query.last_hit_by_player ? Math.Random(1,3) : 0&#34;</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-c1">//You can breed this mob
+</span></span></span><span class="chroma-line"><span class="chroma-cl"><span class="chroma-c1"></span>                <span class="chroma-nt">&#34;minecraft:breedable&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;requireTame&#34;</span><span class="chroma-p">:</span> <span class="chroma-kc">false</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;breedsWith&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                        <span class="chroma-nt">&#34;mateType&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;tut:skele_yaklin&#34;</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                        <span class="chroma-nt">&#34;babyType&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;tut:skele_yaklin&#34;</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                        <span class="chroma-nt">&#34;breed_event&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                            <span class="chroma-nt">&#34;event&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;minecraft:entity_born&#34;</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                            <span class="chroma-nt">&#34;target&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;baby&#34;</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                        <span class="chroma-p">}</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;breedItems&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">[</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                        <span class="chroma-s2">&#34;tut:meal&#34;</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-p">]</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;minecraft:behavior.breed&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;priority&#34;</span><span class="chroma-p">:</span> <span class="chroma-mi">3</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;speed_multiplier&#34;</span><span class="chroma-p">:</span> <span class="chroma-mf">1.0</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-p">}</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-c1">//this component group gets added by default in entity_spawned and entity_born events.
+</span></span></span><span class="chroma-line"><span class="chroma-cl"><span class="chroma-c1"></span>            <span class="chroma-nt">&#34;tut:wild&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-c1">//make the entity attack back
+</span></span></span><span class="chroma-line"><span class="chroma-cl"><span class="chroma-c1"></span>                <span class="chroma-nt">&#34;minecraft:behavior.hurt_by_target&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;priority&#34;</span><span class="chroma-p">:</span> <span class="chroma-mi">1</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-c1">//how much damage the entity deals
+</span></span></span><span class="chroma-line"><span class="chroma-cl"><span class="chroma-c1"></span>                <span class="chroma-nt">&#34;minecraft:attack&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;damage&#34;</span><span class="chroma-p">:</span> <span class="chroma-mi">6</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;effect_name&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;weakness&#34;</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;effect_duration&#34;</span><span class="chroma-p">:</span> <span class="chroma-mi">10</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-c1">//attack AI type
+</span></span></span><span class="chroma-line"><span class="chroma-cl"><span class="chroma-c1"></span>                <span class="chroma-nt">&#34;minecraft:behavior.melee_attack&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;priority&#34;</span><span class="chroma-p">:</span> <span class="chroma-mi">3</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;speed_multiplier&#34;</span><span class="chroma-p">:</span> <span class="chroma-mf">1.1</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;track_target&#34;</span><span class="chroma-p">:</span> <span class="chroma-kc">false</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-c1">//chose targets
+</span></span></span><span class="chroma-line"><span class="chroma-cl"><span class="chroma-c1"></span>                <span class="chroma-nt">&#34;minecraft:behavior.nearest_attackable_target&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;priority&#34;</span><span class="chroma-p">:</span> <span class="chroma-mi">1</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;within_radius&#34;</span><span class="chroma-p">:</span> <span class="chroma-mi">2</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;reselect_targets&#34;</span><span class="chroma-p">:</span> <span class="chroma-kc">true</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;entity_types&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">[</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                        <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                            <span class="chroma-nt">&#34;filters&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                <span class="chroma-nt">&#34;any_of&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">[</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                    <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                        <span class="chroma-nt">&#34;test&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;is_family&#34;</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                        <span class="chroma-nt">&#34;subject&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;other&#34;</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                        <span class="chroma-nt">&#34;value&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;endermite&#34;</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                    <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                    <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                        <span class="chroma-nt">&#34;test&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;is_family&#34;</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                        <span class="chroma-nt">&#34;subject&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;other&#34;</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                        <span class="chroma-nt">&#34;value&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;silverfish&#34;</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                    <span class="chroma-p">}</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                <span class="chroma-p">]</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                            <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                            <span class="chroma-nt">&#34;max_dist&#34;</span><span class="chroma-p">:</span> <span class="chroma-mi">35</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                        <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                        <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                            <span class="chroma-nt">&#34;filters&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                <span class="chroma-nt">&#34;any_of&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">[</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                    <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                        <span class="chroma-nt">&#34;test&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;is_family&#34;</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                        <span class="chroma-nt">&#34;subject&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;other&#34;</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                        <span class="chroma-nt">&#34;value&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;skeleton_horse&#34;</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                    <span class="chroma-p">}</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                <span class="chroma-p">]</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                            <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                            <span class="chroma-nt">&#34;max_dist&#34;</span><span class="chroma-p">:</span> <span class="chroma-mi">64</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                            <span class="chroma-nt">&#34;must_see&#34;</span><span class="chroma-p">:</span> <span class="chroma-kc">false</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                        <span class="chroma-p">}</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-p">]</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;must_see&#34;</span><span class="chroma-p">:</span> <span class="chroma-kc">true</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;must_see_forget_duration&#34;</span><span class="chroma-p">:</span> <span class="chroma-mi">17</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;minecraft:tameable&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;probability&#34;</span><span class="chroma-p">:</span> <span class="chroma-mf">0.33</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;tame_items&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;minecraft:rotten_flesh&#34;</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;tame_event&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                        <span class="chroma-nt">&#34;event&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;minecraft:on_tame&#34;</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                        <span class="chroma-nt">&#34;target&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;self&#34;</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-p">}</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-p">}</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-c1">//this gets added when the entitiy gets tamed in &#34;minecraft:on_tame&#34; event
+</span></span></span><span class="chroma-line"><span class="chroma-cl"><span class="chroma-c1"></span>            <span class="chroma-nt">&#34;tut:tamed&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-c1">//rideable
+</span></span></span><span class="chroma-line"><span class="chroma-cl"><span class="chroma-c1"></span>                <span class="chroma-nt">&#34;minecraft:horse.jump_strength&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;value&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                        <span class="chroma-nt">&#34;range_min&#34;</span><span class="chroma-p">:</span> <span class="chroma-mf">0.4</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                        <span class="chroma-nt">&#34;range_max&#34;</span><span class="chroma-p">:</span> <span class="chroma-mf">1.5</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-p">}</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;minecraft:is_saddled&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span><span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;minecraft:input_ground_controlled&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span><span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;minecraft:can_power_jump&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span><span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;minecraft:behavior.player_ride_tamed&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span><span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;minecraft:is_tamed&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span><span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;minecraft:rideable&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;priority&#34;</span><span class="chroma-p">:</span> <span class="chroma-mi">0</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;seat_count&#34;</span><span class="chroma-p">:</span> <span class="chroma-mi">1</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;crouching_skip_interact&#34;</span><span class="chroma-p">:</span> <span class="chroma-kc">true</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;family_types&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">[</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                        <span class="chroma-s2">&#34;player&#34;</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-p">]</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;interact_text&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;Ride the Skele Yaklin&#34;</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;seats&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                        <span class="chroma-nt">&#34;position&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">[</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                            <span class="chroma-mf">0.0</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                            <span class="chroma-mf">1.1</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                            <span class="chroma-mf">-0.2</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                        <span class="chroma-p">]</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-p">}</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-c1">//inventory
+</span></span></span><span class="chroma-line"><span class="chroma-cl"><span class="chroma-c1"></span>                <span class="chroma-nt">&#34;minecraft:inventory&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;inventory_size&#34;</span><span class="chroma-p">:</span> <span class="chroma-mi">16</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;container_type&#34;</span><span class="chroma-p">:</span> <span class="chroma-s2">&#34;horse&#34;</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-p">}</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-nt">&#34;tut:red&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;minecraft:variant&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;value&#34;</span><span class="chroma-p">:</span> <span class="chroma-mi">0</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-p">}</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-nt">&#34;tut:arctic&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;minecraft:variant&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;value&#34;</span><span class="chroma-p">:</span> <span class="chroma-mi">1</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-p">}</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-p">}</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">        <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">        <span class="chroma-c1">//Components are applied to the entity by default and cannot be removed
+</span></span></span><span class="chroma-line"><span class="chroma-cl"><span class="chroma-c1"></span>        <span class="chroma-nt">&#34;components&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-c1">//the family type for filters
+</span></span></span><span class="chroma-line"><span class="chroma-cl"><span class="chroma-c1"></span>            <span class="chroma-nt">&#34;minecraft:type_family&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;family&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">[</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-s2">&#34;yaklin&#34;</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-s2">&#34;skeleton_yaklin&#34;</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-s2">&#34;neutral&#34;</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-s2">&#34;nether_mob&#34;</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-p">]</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-nt">&#34;minecraft:breathable&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;totalSupply&#34;</span><span class="chroma-p">:</span> <span class="chroma-mi">15</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;suffocateTime&#34;</span><span class="chroma-p">:</span> <span class="chroma-mi">0</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-c1">//hitbox/shadow
+</span></span></span><span class="chroma-line"><span class="chroma-cl"><span class="chroma-c1"></span>            <span class="chroma-nt">&#34;minecraft:collision_box&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;width&#34;</span><span class="chroma-p">:</span> <span class="chroma-mf">1.0</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;height&#34;</span><span class="chroma-p">:</span> <span class="chroma-mf">0.8</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-c1">//health, speed and some other self-explainable properties
+</span></span></span><span class="chroma-line"><span class="chroma-cl"><span class="chroma-c1"></span>            <span class="chroma-nt">&#34;minecraft:nameable&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span><span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-nt">&#34;minecraft:health&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;value&#34;</span><span class="chroma-p">:</span> <span class="chroma-mi">26</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;max&#34;</span><span class="chroma-p">:</span> <span class="chroma-mi">30</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-nt">&#34;minecraft:movement&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;value&#34;</span><span class="chroma-p">:</span> <span class="chroma-mf">0.20</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-nt">&#34;minecraft:leashable&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span><span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-c1">//How the mob navigates
+</span></span></span><span class="chroma-line"><span class="chroma-cl"><span class="chroma-c1"></span>            <span class="chroma-nt">&#34;minecraft:navigation.walk&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;can_path_over_water&#34;</span><span class="chroma-p">:</span> <span class="chroma-kc">true</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;avoid_damage_blocks&#34;</span><span class="chroma-p">:</span> <span class="chroma-kc">true</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-nt">&#34;minecraft:movement.basic&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span><span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-nt">&#34;minecraft:jump.static&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span><span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-c1">//A mob panics when hit
+</span></span></span><span class="chroma-line"><span class="chroma-cl"><span class="chroma-c1"></span>            <span class="chroma-nt">&#34;minecraft:behavior.panic&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;priority&#34;</span><span class="chroma-p">:</span> <span class="chroma-mi">1</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;speed_multiplier&#34;</span><span class="chroma-p">:</span> <span class="chroma-mf">1.5</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-c1">//The mob will go to the player who holds the items which tempt it
+</span></span></span><span class="chroma-line"><span class="chroma-cl"><span class="chroma-c1"></span>            <span class="chroma-nt">&#34;minecraft:behavior.tempt&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;priority&#34;</span><span class="chroma-p">:</span> <span class="chroma-mi">4</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;speed_multiplier&#34;</span><span class="chroma-p">:</span> <span class="chroma-mf">1.0</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;items&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">[</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-s2">&#34;tut:meal&#34;</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-p">]</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-c1">//random walk around
+</span></span></span><span class="chroma-line"><span class="chroma-cl"><span class="chroma-c1"></span>            <span class="chroma-nt">&#34;minecraft:behavior.random_stroll&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;priority&#34;</span><span class="chroma-p">:</span> <span class="chroma-mi">6</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;speed_multiplier&#34;</span><span class="chroma-p">:</span> <span class="chroma-mf">1.0</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-nt">&#34;minecraft:behavior.look_at_player&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;priority&#34;</span><span class="chroma-p">:</span> <span class="chroma-mi">7</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;look_distance&#34;</span><span class="chroma-p">:</span> <span class="chroma-mf">6.0</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;probability&#34;</span><span class="chroma-p">:</span> <span class="chroma-mf">0.02</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-nt">&#34;minecraft:behavior.random_look_around&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;priority&#34;</span><span class="chroma-p">:</span> <span class="chroma-mi">8</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-c1">//necessary, otherwise the mob will just fall through bedrock
+</span></span></span><span class="chroma-line"><span class="chroma-cl"><span class="chroma-c1"></span>            <span class="chroma-nt">&#34;minecraft:physics&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span><span class="chroma-p">}</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">        <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">        <span class="chroma-nt">&#34;events&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-c1">//This events gets applied whenewer a new entity is added.
+</span></span></span><span class="chroma-line"><span class="chroma-cl"><span class="chroma-c1"></span>            <span class="chroma-nt">&#34;minecraft:entity_spawned&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-c1">//Every object in the &#34;sequence&#34; array will be run.
+</span></span></span><span class="chroma-line"><span class="chroma-cl"><span class="chroma-c1"></span>                <span class="chroma-nt">&#34;sequence&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">[</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                        <span class="chroma-c1">//either the adult or the baby variant gets randomly chosen, along with the &#34;wild&#34; variation
+</span></span></span><span class="chroma-line"><span class="chroma-cl"><span class="chroma-c1"></span>                        <span class="chroma-nt">&#34;randomize&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">[</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                            <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                <span class="chroma-nt">&#34;weight&#34;</span><span class="chroma-p">:</span> <span class="chroma-mi">55</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                <span class="chroma-nt">&#34;remove&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span><span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                <span class="chroma-nt">&#34;add&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                    <span class="chroma-nt">&#34;component_groups&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">[</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                        <span class="chroma-s2">&#34;tut:adult&#34;</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                        <span class="chroma-s2">&#34;tut:wild&#34;</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                    <span class="chroma-p">]</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                <span class="chroma-p">}</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                            <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                            <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                <span class="chroma-nt">&#34;weight&#34;</span><span class="chroma-p">:</span> <span class="chroma-mi">5</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                <span class="chroma-nt">&#34;remove&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span><span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                <span class="chroma-nt">&#34;add&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                    <span class="chroma-nt">&#34;component_groups&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">[</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                        <span class="chroma-s2">&#34;tut:baby&#34;</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                        <span class="chroma-s2">&#34;tut:wild&#34;</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                    <span class="chroma-p">]</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                <span class="chroma-p">}</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                            <span class="chroma-p">}</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                        <span class="chroma-p">]</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                        <span class="chroma-nt">&#34;randomize&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">[</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                            <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                <span class="chroma-nt">&#34;weight&#34;</span><span class="chroma-p">:</span> <span class="chroma-mi">56</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                <span class="chroma-nt">&#34;add&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                    <span class="chroma-nt">&#34;component_groups&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">[</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                        <span class="chroma-s2">&#34;tut:red&#34;</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                    <span class="chroma-p">]</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                <span class="chroma-p">}</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                            <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                            <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                <span class="chroma-nt">&#34;weight&#34;</span><span class="chroma-p">:</span> <span class="chroma-mi">15</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                <span class="chroma-nt">&#34;add&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                    <span class="chroma-nt">&#34;component_groups&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">[</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                        <span class="chroma-s2">&#34;tut:arctic&#34;</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                    <span class="chroma-p">]</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                                <span class="chroma-p">}</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                            <span class="chroma-p">}</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                        <span class="chroma-p">]</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-p">}</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-p">]</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-c1">//this event fires on the baby entity from the &#34;minecraft:breedable&#34; component above
+</span></span></span><span class="chroma-line"><span class="chroma-cl"><span class="chroma-c1"></span>            <span class="chroma-nt">&#34;minecraft:entity_born&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;remove&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span><span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;add&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;component_groups&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">[</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                        <span class="chroma-s2">&#34;tut:baby&#34;</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                        <span class="chroma-s2">&#34;tut:wild&#34;</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-p">]</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-p">}</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-c1">//this gets fired on a baby entity which grows up in &#34;minecraft:agable:grow_up&#34;
+</span></span></span><span class="chroma-line"><span class="chroma-cl"><span class="chroma-c1"></span>            <span class="chroma-nt">&#34;minecraft:ageable_grow_up&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;remove&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;component_groups&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">[</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                        <span class="chroma-s2">&#34;tut:baby&#34;</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-p">]</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;add&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;component_groups&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">[</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                        <span class="chroma-s2">&#34;tut:adult&#34;</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-p">]</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-p">}</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-c1">//this events gets fired on the wil entity that gets tamed in &#34;minecraft:tamable&#34; - it removes the &#34;wild&#34; component group and adds the &#34;tamed&#34; one.
+</span></span></span><span class="chroma-line"><span class="chroma-cl"><span class="chroma-c1"></span>            <span class="chroma-nt">&#34;minecraft:on_tame&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;remove&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;component_groups&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">[</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                        <span class="chroma-s2">&#34;tut:wild&#34;</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-p">]</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-p">}</span><span class="chroma-p">,</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-nt">&#34;add&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">{</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-nt">&#34;component_groups&#34;</span><span class="chroma-p">:</span> <span class="chroma-p">[</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                        <span class="chroma-s2">&#34;tut:tamed&#34;</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                    <span class="chroma-p">]</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">                <span class="chroma-p">}</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">            <span class="chroma-p">}</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">        <span class="chroma-p">}</span>
+</span></span><span class="chroma-line"><span class="chroma-cl">    <span class="chroma-p">}</span>
+</span></span><span class="chroma-line"><span class="chroma-cl"><span class="chroma-p">}</span></span></span></code></pre></div>
+                
+            </div>
+        </div>
+
+        <div
+            id="sidebar"
+            class="w-64 bg-neutral-100 dark:bg-neutral-800 border-r border-t border-b border-neutral-300 dark:border-neutral-600 rounded-r flex flex-col text-sm">
+            <div class="border-b border-neutral-300 dark:border-neutral-600 flex flex-row w-full items-center">
+                <p class="px-1 my-1 mx-1 font-semibold"></p>
+                
+            </div>
+            <div class="flex flex-col overflow-auto">
+                <div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/">readme</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 1);">bp</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 3);">archive</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/bp/archive/unnamed.json" style="padding-left: calc(var(--spacing) * 5);">unnamed.json</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/bp/archive/unnamed2.json" style="padding-left: calc(var(--spacing) * 5);">unnamed2.json</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/bp/archive/unnamed3.json" style="padding-left: calc(var(--spacing) * 5);">unnamed3.json</a></div><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 3);">biomes</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/bp/biomes/cold_biome.json" style="padding-left: calc(var(--spacing) * 5);">cold_biome.json</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/bp/biomes/volcanic.json" style="padding-left: calc(var(--spacing) * 5);">volcanic.json</a></div><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 3);">blocks</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/bp/blocks/blocky.json" style="padding-left: calc(var(--spacing) * 5);">blocky.json</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/bp/blocks/compass_block.json" style="padding-left: calc(var(--spacing) * 5);">compass_block.json</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/bp/blocks/flashing.json" style="padding-left: calc(var(--spacing) * 5);">flashing.json</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/bp/blocks/sapp_log.json" style="padding-left: calc(var(--spacing) * 5);">sapp_log.json</a></div><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 3);">entities</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/bp/entities/skele_yaklin.json" style="padding-left: calc(var(--spacing) * 5);">skele_yaklin.json</a></div><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 3);">feature_rules</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/bp/feature_rules/overworld_underground_blocky_ore_feature.json" style="padding-left: calc(var(--spacing) * 5);">overworld_underground_blocky_ore_feature.json</a></div><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 3);">features</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/bp/features/blocky_ore_feature.json" style="padding-left: calc(var(--spacing) * 5);">blocky_ore_feature.json</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/bp/features/unnamed.json" style="padding-left: calc(var(--spacing) * 5);">unnamed.json</a></div><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 3);">functions</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/bp/functions/diamond_tools.mcfunction" style="padding-left: calc(var(--spacing) * 5);">diamond_tools.mcfunction</a></div><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 3);">items</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/bp/items/gem.json" style="padding-left: calc(var(--spacing) * 5);">gem.json</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/bp/items/meal.json" style="padding-left: calc(var(--spacing) * 5);">meal.json</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/bp/items/scheme.json" style="padding-left: calc(var(--spacing) * 5);">scheme.json</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/bp/items/seed.json" style="padding-left: calc(var(--spacing) * 5);">seed.json</a></div><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 3);">loot_tables</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 5);">blocks</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/bp/loot_tables/blocks/blocky.json" style="padding-left: calc(var(--spacing) * 7);">blocky.json</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/bp/loot_tables/blocks/compass_block.json" style="padding-left: calc(var(--spacing) * 7);">compass_block.json</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/bp/loot_tables/blocks/flashing.json" style="padding-left: calc(var(--spacing) * 7);">flashing.json</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/bp/loot_tables/blocks/sapp_log.json" style="padding-left: calc(var(--spacing) * 7);">sapp_log.json</a></div><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 5);">entities</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/bp/loot_tables/entities/skele_yaklin.json" style="padding-left: calc(var(--spacing) * 7);">skele_yaklin.json</a></div></div><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/bp/manifest.json" style="padding-left: calc(var(--spacing) * 3);">manifest.json</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/bp/pack_icon.png" style="padding-left: calc(var(--spacing) * 3);">pack_icon.png</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 3);">recipes</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/bp/recipes/compass_block.json" style="padding-left: calc(var(--spacing) * 5);">compass_block.json</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/bp/recipes/flashing.json" style="padding-left: calc(var(--spacing) * 5);">flashing.json</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/bp/recipes/flashing_to_gem.json" style="padding-left: calc(var(--spacing) * 5);">flashing_to_gem.json</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/bp/recipes/furnace_meal_from_bread.json" style="padding-left: calc(var(--spacing) * 5);">furnace_meal_from_bread.json</a></div><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 3);">spawn_rules</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/bp/spawn_rules/skele_yaklin.json" style="padding-left: calc(var(--spacing) * 5);">skele_yaklin.json</a></div></div><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 1);">rp</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 3);">animation_controllers</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/rp/animation_controllers/skele_yaklin.animation.controller.json" style="padding-left: calc(var(--spacing) * 5);">skele_yaklin.animation.controller.json</a></div><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 3);">animations</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/rp/animations/skele_yaklin.animation.json" style="padding-left: calc(var(--spacing) * 5);">skele_yaklin.animation.json</a></div><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/rp/blocks.json" style="padding-left: calc(var(--spacing) * 3);">blocks.json</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 3);">entity</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/rp/entity/skele_yaklin.entity.json" style="padding-left: calc(var(--spacing) * 5);">skele_yaklin.entity.json</a></div><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 3);">items</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/rp/items/gem.json" style="padding-left: calc(var(--spacing) * 5);">gem.json</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/rp/items/meal.json" style="padding-left: calc(var(--spacing) * 5);">meal.json</a></div><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/rp/manifest.json" style="padding-left: calc(var(--spacing) * 3);">manifest.json</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 3);">models</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 5);">entity</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/rp/models/entity/skele_yaklin.json" style="padding-left: calc(var(--spacing) * 7);">skele_yaklin.json</a></div></div><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/rp/pack_icon.png" style="padding-left: calc(var(--spacing) * 3);">pack_icon.png</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 3);">particles</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/rp/particles/curvy_particle.json" style="padding-left: calc(var(--spacing) * 5);">curvy_particle.json</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/rp/particles/pink_hit.json" style="padding-left: calc(var(--spacing) * 5);">pink_hit.json</a></div><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 3);">render_controllers</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/rp/render_controllers/skele_yaklin.render_controllers.json" style="padding-left: calc(var(--spacing) * 5);">skele_yaklin.render_controllers.json</a></div><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 3);">sounds</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 5);">mob</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/rp/sounds/mob/sound_definitions.json" style="padding-left: calc(var(--spacing) * 7);">sound_definitions.json</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/rp/sounds/mob/yaklin_moo.ogg" style="padding-left: calc(var(--spacing) * 7);">yaklin_moo.ogg</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/rp/sounds/mob/yaklin_moo_2.ogg" style="padding-left: calc(var(--spacing) * 7);">yaklin_moo_2.ogg</a></div></div><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/rp/sounds.json" style="padding-left: calc(var(--spacing) * 3);">sounds.json</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 3);">texts</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/rp/texts/en_US.lang" style="padding-left: calc(var(--spacing) * 5);">en_US.lang</a></div><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 3);">textures</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 5);">blocks</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/rp/textures/blocks/blocky.png" style="padding-left: calc(var(--spacing) * 7);">blocky.png</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 7);">compass_block</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/rp/textures/blocks/compass_block/sb_down.png" style="padding-left: calc(var(--spacing) * 9);">sb_down.png</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/rp/textures/blocks/compass_block/sb_east.png" style="padding-left: calc(var(--spacing) * 9);">sb_east.png</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/rp/textures/blocks/compass_block/sb_north.png" style="padding-left: calc(var(--spacing) * 9);">sb_north.png</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/rp/textures/blocks/compass_block/sb_south.png" style="padding-left: calc(var(--spacing) * 9);">sb_south.png</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/rp/textures/blocks/compass_block/sb_up.png" style="padding-left: calc(var(--spacing) * 9);">sb_up.png</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/rp/textures/blocks/compass_block/sb_west.png" style="padding-left: calc(var(--spacing) * 9);">sb_west.png</a></div><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/rp/textures/blocks/flashing_flipbook.png" style="padding-left: calc(var(--spacing) * 7);">flashing_flipbook.png</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/rp/textures/blocks/sapp_log_side.png" style="padding-left: calc(var(--spacing) * 7);">sapp_log_side.png</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/rp/textures/blocks/sapp_log_top.png" style="padding-left: calc(var(--spacing) * 7);">sapp_log_top.png</a></div><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 5);">entity</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/rp/textures/entity/skele_yaklin.png" style="padding-left: calc(var(--spacing) * 7);">skele_yaklin.png</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/rp/textures/entity/skele_yaklin_arctic.png" style="padding-left: calc(var(--spacing) * 7);">skele_yaklin_arctic.png</a></div><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/rp/textures/flipbook_textures.json" style="padding-left: calc(var(--spacing) * 5);">flipbook_textures.json</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/rp/textures/item_texture.json" style="padding-left: calc(var(--spacing) * 5);">item_texture.json</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 5);">items</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/rp/textures/items/gem.png" style="padding-left: calc(var(--spacing) * 7);">gem.png</a><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/rp/textures/items/meal.png" style="padding-left: calc(var(--spacing) * 7);">meal.png</a></div><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" style="padding-left: calc(var(--spacing) * 5);">particle</a><div class="flex flex-col"><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/rp/textures/particle/tut_particles.png" style="padding-left: calc(var(--spacing) * 7);">tut_particles.png</a></div><a class="hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5" href="/bedrock-snippets/snippets/legacy_guide/rp/textures/terrain_texture.json" style="padding-left: calc(var(--spacing) * 5);">terrain_texture.json</a></div></div></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="flex justify-center w-full fixed bottom-6">
+    <span id="toast" class="bg-black text-white rounded px-2 py-1">
+        Copied to Clipboard
+        </spa>
+</div>
+
+<script src="/bedrock-snippets/js/copy.js" module></script>
+<script src="/bedrock-snippets/js/sidebar.js" module></script>
+
+
+    <script src="/bedrock-snippets/js/preload.js" type="module"></script>
+</body>
+
+</html>
