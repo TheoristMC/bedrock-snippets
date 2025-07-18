@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"html/template"
 	"os"
+	"slices"
 
 	"github.com/chasefleming/elem-go"
 	"github.com/chasefleming/elem-go/attrs"
@@ -12,6 +13,9 @@ import (
 
 func generateHomepage() {
 	homepageLinks := generateHomepageLinks()
+
+	snippetContributors := generateContributors(SNIPPET_REPO_OWNER, SNIPPET_REPO_NAME)
+	websiteContributors := generateContributors("hatchibombotar", "bedrock-snippets")
 
 	tmpl, err := template.ParseFiles("./html/layout.html", "./html/home.html")
 	if err != nil {
@@ -25,13 +29,17 @@ func generateHomepage() {
 	defer outputFile.Close()
 
 	data := struct {
-		Content        template.HTML
-		Title          string
-		ROOT_DIRECTORY string
+		Links               template.HTML
+		SnippetContributors template.HTML
+		WebsiteContributors template.HTML
+		Title               string
+		ROOT_DIRECTORY      string
 	}{
-		Content:        homepageLinks,
-		Title:          "Home",
-		ROOT_DIRECTORY: ROOT_DIRECTORY,
+		Links:               homepageLinks,
+		SnippetContributors: snippetContributors,
+		WebsiteContributors: websiteContributors,
+		Title:               "Home",
+		ROOT_DIRECTORY:      ROOT_DIRECTORY,
 	}
 
 	err = tmpl.ExecuteTemplate(
@@ -45,11 +53,6 @@ func generateHomepage() {
 	}
 }
 
-type snippetIdAndData struct {
-	id   string
-	data SnippetData
-}
-
 func generateHomepageLinks() template.HTML {
 	content := elem.Div(attrs.Props{
 		attrs.Class: "flex flex-row flex-wrap gap-3 p-2",
@@ -58,31 +61,6 @@ func generateHomepageLinks() template.HTML {
 	snippets, err := os.ReadDir(SNIPPET_DIRECTORY)
 	if err != nil {
 		panic(err)
-	}
-
-	snippetsInCategories := make(map[string][]snippetIdAndData)
-	for _, category := range Categories {
-		snippetsInCategories[category.Id] = make([]snippetIdAndData, 0)
-	}
-
-	for _, e := range snippets {
-		if !e.IsDir() {
-			continue
-		}
-		snippetName := e.Name()
-
-		var snippetData SnippetData
-		snippetDataJson, err := os.ReadFile(SNIPPET_DIRECTORY + "/" + snippetName + "/snippet.json")
-		if err != nil {
-			panic(`Snippet is missing a snippet.json file.`)
-		}
-
-		err = json.Unmarshal([]byte(snippetDataJson), &snippetData)
-		if err != nil {
-			panic("Error decoding JSON.")
-		}
-
-		snippetsInCategories[snippetData.Category] = append(snippetsInCategories[snippetData.Category], snippetIdAndData{snippetName, snippetData})
 	}
 
 	for _, category := range Categories {
@@ -109,22 +87,74 @@ func generateHomepageLinks() template.HTML {
 			),
 		)
 
-		for _, snippet := range snippetsInCategories[category.Id] {
-			categoryDiv.Children = append(categoryDiv.Children,
-				elem.A(
-					attrs.Props{
-						attrs.Href: ROOT_DIRECTORY + "/snippets/" + snippet.id,
-					},
-					elem.Span(attrs.Props{
-						attrs.Class: "text-blue-600 dark:text-blue-500",
-					},
-						elem.Text(snippet.data.Name),
+		for _, e := range snippets {
+			if !e.IsDir() {
+				continue
+			}
+			snippetId := e.Name()
+
+			var snippetData SnippetData
+			snippetDataJson, err := os.ReadFile(SNIPPET_DIRECTORY + "/" + snippetId + "/meta.json")
+			if err != nil {
+				fmt.Println("Snippet", snippetId, "is missing a meta.json file.")
+				continue
+			}
+
+			err = json.Unmarshal([]byte(snippetDataJson), &snippetData)
+			if err != nil {
+				panic("Error decoding JSON.")
+			}
+
+			categoryIncluded := slices.Contains(snippetData.Tags, category.Id)
+			if categoryIncluded {
+				categoryDiv.Children = append(categoryDiv.Children,
+					elem.A(
+						attrs.Props{
+							attrs.Href: ROOT_DIRECTORY + "/snippets/" + snippetId,
+						},
+						elem.Span(attrs.Props{
+							attrs.Class: "text-blue-600 dark:text-blue-500",
+						},
+							elem.Text(snippetData.Name),
+						),
 					),
-				),
-			)
+				)
+			}
 		}
 
 		content.Children = append(content.Children, categoryDiv)
+	}
+
+	return template.HTML(content.Render())
+}
+
+func generateContributors(owner, repo string) template.HTML {
+	contributors, err := GetGitHubContributorsAPI(owner, repo, "")
+	if err != nil {
+		fmt.Println(err)
+		return ""
+	}
+
+	content := elem.Div(attrs.Props{
+		attrs.Class: "flex flex-row flex-wrap gap-3 p-2",
+	})
+
+	for _, contributor := range contributors {
+		contributorDiv := elem.A(
+			attrs.Props{
+				attrs.Href:  contributor.HTMLURL,
+				attrs.Title: contributor.Login,
+				attrs.Class: "h-8 w-8",
+			},
+			elem.Img(
+				attrs.Props{
+					attrs.Src:   contributor.AvatarURL,
+					attrs.Alt:   contributor.Login,
+					attrs.Class: "rounded-full",
+				},
+			),
+		)
+		content.Children = append(content.Children, contributorDiv)
 	}
 
 	return template.HTML(content.Render())

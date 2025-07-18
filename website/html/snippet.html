@@ -30,8 +30,17 @@
             <div
                 class="h-full overflow-y-auto overflow-x-auto grow min-h-64 p-2 pt-8 w-full">
                 {{if .OverviewPage}}
-                <div class="prose">
-                    {{.TextContent}}
+                <div class="text-sm">
+                    <h2 class="text-xl font-semibold">{{.Title}}</h1>
+                    <a href="{{.SourceHref}}" class="text-blue-600 dark:text-blue-500 underline">Source Code</a>
+                    <h3 class="text-lg font-semibold mt-2">License</h2>
+                    <p>
+                        This snippet is licensed under the
+                        <a href="https://github.com/bedrock-oss/bedrock-examples/blob/main/LICENSE" class="text-blue-600 dark:text-blue-500 underline">
+                            mit license
+                        </a>
+                    </p>
+                    <!-- {{.TextContent}} -->
                 </div>
                 {{else}}
                 {{.TextContent}}

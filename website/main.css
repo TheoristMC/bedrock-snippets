@@ -102,7 +102,7 @@ select > option {
 .chroma-nt {
   color: #f92672;
 } 
-.chroma-s2 {
+.chroma-s, .chroma-s2 {
   color: #d88200;
 }
 .chroma-c, .chroma-c1 {
@@ -112,13 +112,20 @@ select > option {
   color: #ae81ff;
 }
 .chroma-kc {
-  color: #66d9ef;
+  color: #0ac;
 }
 .chroma-nx {
   color: #000000;
 }
 .chroma-o {
   color: #f92672;
+}
+.chroma-nb {
+  color: #7dbb02;
+}
+/* .chroma-l {} */
+.chroma-na {
+  color: #00a6c2;
 }
 .dark {
   .chroma-p {

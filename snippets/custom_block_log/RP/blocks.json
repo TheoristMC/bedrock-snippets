@@ -1,9 +1,0 @@
-{
-    "format_version": "1.21.40",
-    "snippets:custom_log": {
-        "sound" : "wood"
-    },
-    "snippets:stripped_custom_log": {
-        "sound" : "wood"
-    }
-}

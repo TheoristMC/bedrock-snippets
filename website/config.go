@@ -11,16 +11,22 @@ var Categories []CategoryData = []CategoryData{
 	{"entities", "Entities", "/spawn_egg_30.png"},
 	{"items", "Items", "/iron_pickaxe_0.png"},
 	{"world-generation", "World Generation", "/buildplate.png"},
-	{"misc", "Misc", "/crafting_table_0.png"},
+	{"functions", "Functions", "/command_block.png"},
+	// {"script-api", "Script API", "/levers.png"},
 }
 
-var ExcludeFiles []string = []string{"snippet.md", "snippet.json", "snippet_icon.png"}
+var ExcludeFiles []string = []string{"snippet.md", "meta.json", "snippet_icon.png"}
 
 type SnippetData struct {
-	Name     string `json:"name"`
-	Category string `json:"category"`
+	Name     string   `json:"name"`
+	Category string   `json:"category"`
+	Tags     []string `json:"tags"`
 }
 
-const REPOSITORY_ROOT string = "https://github.com/Hatchibombotar/bedrock-snippets/"
+const SNIPPET_REPO_OWNER string = "bedrock-oss"
+const SNIPPET_REPO_NAME string = "bedrock-examples"
+
+const SNIPPET_REPO_ROOT string = "https://github.com/" + SNIPPET_REPO_OWNER + "/" + SNIPPET_REPO_NAME + "/"
+
 const ROOT_DIRECTORY string = "/bedrock-snippets"
-const SNIPPET_DIRECTORY string = "../snippets"
+const SNIPPET_DIRECTORY string = "./.tmp/snippet_repo/resources/"

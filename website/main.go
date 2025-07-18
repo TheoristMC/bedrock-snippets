@@ -1,20 +1,32 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 	"log"
+	"net/http"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"time"
+
+	"github.com/go-git/go-git/v5"
 )
 
 func main() {
 	os.RemoveAll("./build/")
 	os.MkdirAll("./build/", os.ModePerm)
 
-	err := copyPublicFolder()
+	os.RemoveAll("./.tmp/snippet_repo/")
+	os.MkdirAll("./.tmp/snippet_repo/", os.ModePerm)
+
+	err := cloneGitRepo("./.tmp/snippet_repo/")
+	if err != nil {
+		panic(err)
+	}
+
+	err = copyPublicFolder()
 	if err != nil {
 		panic(err)
 	}
@@ -50,6 +62,55 @@ func main() {
 	if len(os.Args) > 1 && os.Args[1] == "-dev" {
 		runDevServer()
 	}
+}
+
+func cloneGitRepo(destination string) error {
+	_, err := git.PlainClone(destination, false, &git.CloneOptions{
+		URL:      "https://github.com/bedrock-oss/bedrock-examples",
+		Progress: os.Stdout,
+	})
+	return err
+}
+
+// Contributor represents a GitHub contributor
+type Contributor struct {
+	Login         string `json:"login"`
+	HTMLURL       string `json:"html_url"`
+	AvatarURL     string `json:"avatar_url"`
+	Contributions int    `json:"contributions"`
+}
+
+func GetGitHubContributorsAPI(owner, repo string, token string) ([]Contributor, error) {
+	apiURL := fmt.Sprintf("https://api.github.com/repos/%s/%s/contributors", owner, repo)
+
+	req, err := http.NewRequest("GET", apiURL, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	// Optional: Use token for higher rate limits
+	if token != "" {
+		req.Header.Set("Authorization", "token "+token)
+	}
+
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != 200 {
+		return nil, fmt.Errorf("GitHub API returned status %d", resp.StatusCode)
+	}
+
+	var contributors []Contributor
+	err = json.NewDecoder(resp.Body).Decode(&contributors)
+	if err != nil {
+		return nil, err
+	}
+
+	return contributors, nil
 }
 
 func copyPublicFolder() error {

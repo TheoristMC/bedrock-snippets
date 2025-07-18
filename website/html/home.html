@@ -1,7 +1,20 @@
 {{define "content"}}
 <div class="p-2">
-    <h1 class="text-2xl font-bold">Bedrock Snippets</h1>
+    <h1 class="text-3xl font-bold">Bedrock Snippets</h1>
     <p>A collection of snippets showcasing many of the things you can do with add-ons</p>
 </div>
-    {{.Content}}
+
+<div class="m-2 p-2 bg-neutral-100 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-600 rounded-lg">
+
+    <h2 class="font-semibold text-xl">Snippets</h2>
+    {{.Links}}
+</div>
+
+<footer class="px-2">
+    <h2 class="font-semibold text-lg mt-2">Snippet Contributors</h2>
+    {{.SnippetContributors}}
+
+    <h2 class="font-semibold text-lg mt-2">Website Contributors</h2>
+    {{.WebsiteContributors}}
+</footer>
 {{end}}

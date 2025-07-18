@@ -1,1 +1,0 @@
-[Wiki Article](https://wiki.bedrock.dev/entities/dummy-entities)

@@ -1,1 +1,0 @@
-The model files for steve, alex, and the cape.

@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"encoding/base64"
+	"encoding/json"
 	"fmt"
 	"html"
 	"html/template"
@@ -27,11 +28,23 @@ type ContentPageData struct {
 	Category string `json:"category"`
 }
 
-func generatePagesForSnippet(snippetName string) {
-	dirName := "./build/snippets/" + snippetName
-	sourceHref := REPOSITORY_ROOT + "tree/main/snippets/" + snippetName
+func generatePagesForSnippet(snippetId string) {
+	var snippetData SnippetData
+	snippetDataJson, err := os.ReadFile(SNIPPET_DIRECTORY + "/" + snippetId + "/meta.json")
 
-	err := os.Mkdir(dirName, os.ModePerm)
+	if err == nil {
+		err := json.Unmarshal([]byte(snippetDataJson), &snippetData)
+		if err != nil {
+			panic("Error decoding JSON.")
+		}
+	} else {
+		fmt.Println("Snippet", snippetId, "is missing a meta.json file.")
+	}
+
+	sourceHref := SNIPPET_REPO_ROOT + "tree/main/resources/" + snippetId
+	dirName := "./build/snippets/" + snippetId
+
+	err = os.Mkdir(dirName, os.ModePerm)
 	if err != nil {
 		panic(err)
 	}
@@ -42,14 +55,14 @@ func generatePagesForSnippet(snippetName string) {
 		panic(err)
 	}
 
-	sidebar := generateSidebarElement(snippetName, "", 0)
+	sidebar := generateSidebarElement(snippetId, "", 0)
 
-	filepath.WalkDir(SNIPPET_DIRECTORY+"/"+snippetName+"/", func(path string, d fs.DirEntry, err error) error {
+	filepath.WalkDir(SNIPPET_DIRECTORY+"/"+snippetId+"/", func(path string, d fs.DirEntry, err error) error {
 		if err != nil {
 			panic(err)
 		}
 
-		rawPath, _ := filepath.Rel("../snippets", path)
+		rawPath, _ := filepath.Rel(SNIPPET_DIRECTORY, path)
 		ext := filepath.Ext(path)
 		outputPath := "build/snippets/" + rawPath
 
@@ -82,7 +95,7 @@ func generatePagesForSnippet(snippetName string) {
 			SourceHref     string
 			ROOT_DIRECTORY string
 		}{
-			Title:          snippetName,
+			Title:          snippetData.Name,
 			SidebarHTML:    template.HTML(sidebar.Render()),
 			Breadcrumbs:    strings.Join(strings.Split(filepath.ToSlash(rawPath), "/"), " > "),
 			OverviewPage:   false,
@@ -99,8 +112,13 @@ func generatePagesForSnippet(snippetName string) {
 			data.TextContent = CreateMDPreview(path)
 		case ".js", ".ts":
 			data.TextContent = CreateJSPreview(path)
+		case ".mcfunction":
+			data.TextContent = CreateMcFunctionPreview(path)
+		case ".lang":
+			data.TextContent = CreateLangPreview(path)
 		default:
-			log.Fatalf("No preview avaliable for %s", ext)
+			data.TextContent = CreateTextPreview(path)
+			log.Printf("No preview avaliable for %s", ext)
 		}
 
 		err = tmpl.ExecuteTemplate(outputFile, "layout.html", data)
@@ -119,13 +137,6 @@ func generatePagesForSnippet(snippetName string) {
 	}
 	defer indexFile.Close()
 
-	indexFileContent, err := os.ReadFile(SNIPPET_DIRECTORY + "/" + snippetName + "/snippet.md")
-	if err != nil {
-		indexFileContent = []byte(`This snippet is missing a snippet.md file.`)
-	}
-
-	renderedIndexFileContent := template.HTML(mdToHTML([]byte(indexFileContent)))
-
 	data := struct {
 		Title          string
 		SidebarHTML    template.HTML
@@ -135,11 +146,10 @@ func generatePagesForSnippet(snippetName string) {
 		SourceHref     string
 		ROOT_DIRECTORY string
 	}{
-		Title:          snippetName,
+		Title:          snippetData.Name,
 		SidebarHTML:    template.HTML(sidebar.Render()),
-		Breadcrumbs:    snippetName + " > overview",
+		Breadcrumbs:    snippetId + " > overview",
 		OverviewPage:   true,
-		TextContent:    renderedIndexFileContent,
 		SourceHref:     sourceHref,
 		ROOT_DIRECTORY: ROOT_DIRECTORY,
 	}
@@ -274,6 +284,77 @@ func CreateJSPreview(filePath string) template.HTML {
 	return template.HTML(container.Render())
 }
 
+func CreateMcFunctionPreview(filePath string) template.HTML {
+	content, err := os.ReadFile(filePath)
+	if err != nil {
+		log.Fatalln("Unable to read file.", err)
+	}
+
+	htmlFormatter := chromaHtmlFormatter.New(
+		chromaHtmlFormatter.LineNumbersInTable(true),
+		chromaHtmlFormatter.WithClasses(true),
+		chromaHtmlFormatter.ClassPrefix("chroma-"),
+	)
+
+	lexer := lexers.Get("mcfunction")
+
+	iterator, err := lexer.Tokenise(nil, string(content))
+	if err != nil {
+		panic(err)
+	}
+
+	var result bytes.Buffer
+	err = htmlFormatter.Format(&result, &chroma.Style{}, iterator)
+	if err != nil {
+		panic(err)
+	}
+
+	container := elem.Div(attrs.Props{
+		attrs.ID:            "snippet-content",
+		"data-content-type": "text",
+		"data-content-text": html.EscapeString(string(content)),
+	},
+		elem.Raw(result.String()),
+	)
+
+	return template.HTML(container.Render())
+}
+func CreateLangPreview(filePath string) template.HTML {
+	content, err := os.ReadFile(filePath)
+	if err != nil {
+		log.Fatalln("Unable to read file.", err)
+	}
+
+	htmlFormatter := chromaHtmlFormatter.New(
+		chromaHtmlFormatter.LineNumbersInTable(true),
+		chromaHtmlFormatter.WithClasses(true),
+		chromaHtmlFormatter.ClassPrefix("chroma-"),
+	)
+
+	lexer := lexers.Get("ini")
+
+	iterator, err := lexer.Tokenise(nil, string(content))
+	if err != nil {
+		panic(err)
+	}
+
+	var result bytes.Buffer
+	err = htmlFormatter.Format(&result, &chroma.Style{}, iterator)
+	if err != nil {
+		panic(err)
+	}
+
+	container := elem.Div(attrs.Props{
+		attrs.ID:            "snippet-content",
+		"data-content-type": "text",
+		"data-content-text": html.EscapeString(string(content)),
+	},
+		elem.Raw(result.String()),
+	)
+
+	return template.HTML(container.Render())
+}
+
 func CreatePNGPreview(filePath string) template.HTML {
 	content, err := os.ReadFile(filePath)
 	if err != nil {
@@ -295,4 +376,21 @@ func CreateMDPreview(filePath string) template.HTML {
 
 	renderedIndexFileContent := mdToHTML([]byte(indexFileContent))
 	return template.HTML(renderedIndexFileContent)
+}
+
+func CreateTextPreview(filePath string) template.HTML {
+	content, err := os.ReadFile(filePath)
+	if err != nil {
+		log.Fatalln("Unable to read file.", err)
+	}
+
+	container := elem.Div(attrs.Props{
+		attrs.ID:            "snippet-content",
+		"data-content-type": "text",
+		"data-content-text": html.EscapeString(string(content)),
+	},
+		elem.Raw(string(content)),
+	)
+
+	return template.HTML(container.Render())
 }

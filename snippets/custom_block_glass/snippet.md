@@ -1,1 +1,0 @@
-This snippet adds a custom glass block with included culling rules to hide faces that are touching.
