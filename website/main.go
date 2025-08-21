@@ -101,7 +101,7 @@ func GetGitHubContributorsAPI(owner, repo string, token string) ([]Contributor, 
 	defer resp.Body.Close()
 
 	if resp.StatusCode != 200 {
-		return nil, fmt.Errorf("GitHub API returned status %d", resp.StatusCode)
+		return nil, fmt.Errorf("GitHub API returned status %d. %s", resp.StatusCode, resp.Status)
 	}
 
 	var contributors []Contributor
