@@ -1,11 +1,22 @@
 {{define "content"}}
 <div class="p-2">
     <h1 class="text-3xl font-bold">Bedrock Snippets</h1>
-    <p>A collection of snippets showcasing many of the things you can do with add-ons</p>
+    <p class="pr-10">An open source library of snippets and example implementations for things you can create using add-ons.</p>
+    <div class="flex gap-2 flex-col sm:flex-row mt-1">
+        <a target="_blank" class="text-blue-600 dark:text-blue-500 bg-neutral-100 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-600 rounded-lg px-1 flex gap-1 items-center justify-center"
+            href="https://github.com/bedrock-oss/bedrock-examples/">
+            Snippet Source Code
+            <img class="h-4 w-4 dark:invert" src="{{.ROOT_DIRECTORY}}/OcLink2.svg">
+        </a>
+        <a target="_blank" class="text-blue-600 dark:text-blue-500 bg-neutral-100 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-600 rounded-lg px-1 flex gap-1 items-center justify-center"
+            href="https://github.com/hatchibombotar/bedrock-snippets/">
+            Website Source Code
+            <img class="h-4 w-4 dark:invert" src="{{.ROOT_DIRECTORY}}/OcLink2.svg">
+        </a>
+    </div>
 </div>
 
-<div class="m-2 p-2 bg-neutral-100 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-600 rounded-lg">
-
+<div class="mx-2 my-1 p-2 bg-neutral-100 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-600 rounded-lg">
     <h2 class="font-semibold text-xl">Snippets</h2>
     {{.Links}}
 </div>
