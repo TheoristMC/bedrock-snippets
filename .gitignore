@@ -7,5 +7,4 @@
 node_modules
 build
 .tmp
-tmp
 repo
