@@ -5,6 +5,7 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
+	"hatchibombotar/bedrock-snippets/website/helper"
 	"html"
 	"html/template"
 	"io/fs"
@@ -176,7 +177,7 @@ func generateSidebarElement(snippetName string, base string, level int) *elem.El
 				attrs.Class: "hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5",
 				attrs.Href:  ROOT_DIRECTORY + "/snippets/" + snippetName + "/",
 			},
-			elem.Text("readme"),
+			elem.Text("📄README"),
 		)
 
 		content.Children = append(content.Children, anchorElement)
@@ -186,6 +187,9 @@ func generateSidebarElement(snippetName string, base string, level int) *elem.El
 		if slices.Contains(ExcludeFiles, e.Name()) {
 			continue
 		}
+
+		anchorElementIcon := helper.Ternary(e.IsDir(), "🗂️", "📄")
+
 		anchorElement := elem.A(
 			attrs.Props{
 				attrs.Class: "hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5",
@@ -193,22 +197,31 @@ func generateSidebarElement(snippetName string, base string, level int) *elem.El
 					styles.PaddingLeft: fmt.Sprint("calc(var(--spacing) * ", (2*level)+1, ")"),
 				}.ToInline(),
 			},
-			elem.Text(e.Name()),
+
+			elem.Text(anchorElementIcon+e.Name()),
 		)
 		if !e.IsDir() {
 			anchorElement.Attrs[attrs.Href] = ROOT_DIRECTORY + "/snippets/" + snippetName + "/" + base + e.Name()
+			content.Children = append(content.Children, anchorElement)
+			continue
 		}
-		content.Children = append(
-			content.Children,
-			anchorElement,
-		)
-		if e.IsDir() {
-			content.Children = append(
-				content.Children,
-				generateSidebarElement(snippetName, base+e.Name()+"/", level+1),
-			)
-		}
+
+		// If directory: create collapsible container
+
+		containerID := fmt.Sprintf("dir-%s-%d", base+e.Name(), level)
+
+		childContainer := elem.Div(attrs.Props{
+			attrs.Class: "ml-2 flex flex-col",
+			attrs.ID:    containerID,
+		}, generateSidebarElement(snippetName, base+e.Name()+"/", level+1))
+
+		// Add onclick handler to toggle visibility
+		anchorElement.Attrs["onclick"] = fmt.Sprintf("toggleDir('%s')", containerID)
+
+		// Append the anchor and its collapsible child container
+		content.Children = append(content.Children, anchorElement, childContainer)
 	}
+
 	return content
 }
 
