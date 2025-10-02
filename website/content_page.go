@@ -172,11 +172,12 @@ func generateSidebarElement(snippetName string, base string, level int) *elem.El
 	})
 
 	if level == 0 {
-		anchorElement := elem.A(
+		anchorElement := elem.Button(
 			attrs.Props{
-				attrs.Class: "hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5",
-				attrs.Href:  ROOT_DIRECTORY + "/snippets/" + snippetName + "/",
+				attrs.Class: "w-full hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5 h-7 text-left truncate",
+				"onclick":   fmt.Sprintf("window.location.href='%s'", ROOT_DIRECTORY+"/snippets/"+snippetName+"/"),
 			},
+
 			elem.Text("📄README"),
 		)
 
@@ -189,19 +190,28 @@ func generateSidebarElement(snippetName string, base string, level int) *elem.El
 		}
 
 		anchorElementIcon := helper.Ternary(e.IsDir(), "🗂️", "📄")
+		anchorElementLabel := anchorElementIcon + e.Name()
+		if e.Name() == "rp" {
+			anchorElementLabel = "🗂️Resource Pack"
+		} else if e.Name() == "bp" {
+			anchorElementLabel = "🗂️Behavior Pack"
+		}
 
-		anchorElement := elem.A(
+		anchorElement := elem.Button(
 			attrs.Props{
-				attrs.Class: "hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5",
-				attrs.Style: styles.Props{
-					styles.PaddingLeft: fmt.Sprint("calc(var(--spacing) * ", (2*level)+1, ")"),
-				}.ToInline(),
+				attrs.Class: "hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5 h-7",
 			},
 
-			elem.Text(anchorElementIcon+e.Name()),
+			elem.P(attrs.Props{
+				attrs.Class: "w-full text-left",
+				attrs.Style: styles.Props{
+					styles.PaddingLeft: helper.Ternary(level > 0, fmt.Sprint("calc(var(--spacing) * ", (2*level)+1, ")"), "0"),
+				}.ToInline(),
+			}, elem.Text(anchorElementLabel)),
 		)
+
 		if !e.IsDir() {
-			anchorElement.Attrs[attrs.Href] = ROOT_DIRECTORY + "/snippets/" + snippetName + "/" + base + e.Name()
+			anchorElement.Attrs["onclick"] = fmt.Sprintf("window.location.href='%s'", ROOT_DIRECTORY+"/snippets/"+snippetName+"/"+base+e.Name())
 			content.Children = append(content.Children, anchorElement)
 			continue
 		}
@@ -211,7 +221,7 @@ func generateSidebarElement(snippetName string, base string, level int) *elem.El
 		containerID := fmt.Sprintf("dir-%s-%d", base+e.Name(), level)
 
 		childContainer := elem.Div(attrs.Props{
-			attrs.Class: "ml-2 flex flex-col",
+			attrs.Class: "flex flex-col",
 			attrs.ID:    containerID,
 		}, generateSidebarElement(snippetName, base+e.Name()+"/", level+1))
 

@@ -10,7 +10,7 @@
             <img id="sidebar-toggle-icon" class="h-4 w-4 dark:invert" src="{{.ROOT_DIRECTORY}}/OcSidebarcollapse2.svg" alt="">
         </button>
     </div>
-    <div class="flex flex-row p-2 flex-grow overflow-auto ">
+    <div class="flex flex-row p-2 flex-grow overflow-auto">
         <div
         id="main-content"
         class="w-full overflow-hidden relative bg-neutral-100 rounded-l dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-600">
@@ -48,23 +48,23 @@
             </div>
         </div>
 
-        <div
-            id="sidebar"
-            class="w-64 bg-neutral-100 dark:bg-neutral-800 border-r border-t border-b border-neutral-300 dark:border-neutral-600 rounded-r flex flex-col text-sm">
-            <div class="border-b border-neutral-300 dark:border-neutral-600 flex flex-row w-full items-center">
-                <p class="px-1 my-1 mx-1 font-semibold">{{.Title}}</p>
-                <!-- <div class="ml-auto mr-1 flex flex-row gap-1">
-                    <a href="#" class="">
-                        <img class="h-4 dark:invert" src="/OcLink2.svg">
-                    </a>
-                    <a href="#" class="">
-                        <img class="h-4 dark:invert" src="/OcMarkgithub2.svg">
-                    </a>
-                </div> -->
-            </div>
-            <div class="w-max flex flex-col overflow-y-auto overflow-x-hidden">
-                {{.SidebarHTML}}
-            </div>
+        <div 
+        id="sidebar"
+        class= "min-w-64 w-max bg-neutral-100 dark:bg-neutral-800 border-r border-t border-b border-neutral-300 dark:border-neutral-600 rounded-r flex flex-col text-sm overflow-hidden">
+          <div class="border-b border-neutral-300 dark:border-neutral-600 flex flex-row w-full items-center">
+            <p class="px-1 my-1 mx-1 font-semibold">{{.Title}}</p>
+            <!-- <div class="ml-auto mr-1 flex flex-row gap-1">
+                <a href="#" class="">
+                    <img class="h-4 dark:invert" src="/OcLink2.svg">
+                </a>
+                <a href="#" class="">
+                    <img class="h-4 dark:invert" src="/OcMarkgithub2.svg">
+                </a>
+            </div> -->
+          </div>
+          <div class="flex flex-col overflow-x-hidden custom-scroll h-full">
+            {{.SidebarHTML}}
+          </div>
         </div>
     </div>
 
@@ -77,7 +77,6 @@
 </div>
 
 <script src="{{.ROOT_DIRECTORY}}/js/copy.js" module></script>
-<script src="{{.ROOT_DIRECTORY}}/js/sidebar-dir.js" module></script>
 <script src="{{.ROOT_DIRECTORY}}/js/sidebar.js" module></script>
 
 {{end}}
