@@ -135,3 +135,7 @@ select > option {
     color: #ffffff;
   }
 }
+
+.directory-header-closed img {
+  rotate: -90deg;
+}

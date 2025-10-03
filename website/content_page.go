@@ -189,6 +189,7 @@ func generateSidebarElement(snippetName string, base string, level int) *elem.El
 		}
 
 		anchorElementIconSrc := ROOT_DIRECTORY + "/OcChevrondown2.svg"
+		childrenBaseDirectory := base + e.Name() + "/"
 
 		anchorElement := elem.A(
 			attrs.Props{
@@ -200,7 +201,8 @@ func generateSidebarElement(snippetName string, base string, level int) *elem.El
 		)
 		if e.IsDir() {
 			// add folder icon
-			anchorElement.Children = append(anchorElement.Children, elem.Img(attrs.Props{attrs.Src: anchorElementIconSrc, attrs.Class: "inline"}))
+			anchorElement.Children = append(anchorElement.Children, elem.Img(attrs.Props{attrs.Src: anchorElementIconSrc, attrs.Class: "inline w-4"}))
+			anchorElement.Attrs[attrs.DataAttr("directory-header")] = childrenBaseDirectory
 		} else {
 			anchorElement.Children = append(anchorElement.Children, elem.Div(attrs.Props{attrs.Class: "mr-2 inline"}))
 		}
@@ -212,8 +214,6 @@ func generateSidebarElement(snippetName string, base string, level int) *elem.El
 			content.Children = append(content.Children, anchorElement)
 			continue
 		}
-
-		childrenBaseDirectory := base + e.Name() + "/"
 
 		// Add onclick handler to toggle visibility
 		anchorElement.Attrs["onclick"] = fmt.Sprintf("toggleDir('%s')", childrenBaseDirectory)
