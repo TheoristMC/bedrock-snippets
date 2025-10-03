@@ -167,7 +167,8 @@ func generateSidebarElement(snippetName string, base string, level int) *elem.El
 		panic(err)
 	}
 	content := elem.Div(attrs.Props{
-		attrs.Class: "flex flex-col",
+		attrs.Class:                         "flex flex-col",
+		attrs.DataAttr("directory-content"): base,
 	})
 
 	if level == 0 {
@@ -191,7 +192,7 @@ func generateSidebarElement(snippetName string, base string, level int) *elem.El
 
 		anchorElement := elem.A(
 			attrs.Props{
-				attrs.Class: "hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5 cursor-pointer",
+				attrs.Class: "hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5 cursor-pointer overflow-hidden text-ellipsis",
 				attrs.Style: styles.Props{
 					styles.PaddingLeft: fmt.Sprint("calc(var(--spacing) * ", (2*level)+1, ")"),
 				}.ToInline(),
@@ -212,20 +213,13 @@ func generateSidebarElement(snippetName string, base string, level int) *elem.El
 			continue
 		}
 
-		// If directory: create collapsible container
-
-		containerID := fmt.Sprintf("dir-%s-%d", base+e.Name(), level)
-
-		childContainer := elem.Div(attrs.Props{
-			attrs.Class: "flex flex-col",
-			attrs.ID:    containerID,
-		}, generateSidebarElement(snippetName, base+e.Name()+"/", level+1))
+		childrenBaseDirectory := base + e.Name() + "/"
 
 		// Add onclick handler to toggle visibility
-		anchorElement.Attrs["onclick"] = fmt.Sprintf("toggleDir('%s')", containerID)
+		anchorElement.Attrs["onclick"] = fmt.Sprintf("toggleDir('%s')", childrenBaseDirectory)
 
 		// Append the anchor and its collapsible child container
-		content.Children = append(content.Children, anchorElement, childContainer)
+		content.Children = append(content.Children, anchorElement, generateSidebarElement(snippetName, childrenBaseDirectory, level+1))
 	}
 
 	return content
