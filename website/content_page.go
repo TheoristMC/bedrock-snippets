@@ -5,7 +5,6 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
-	"hatchibombotar/bedrock-snippets/website/helper"
 	"html"
 	"html/template"
 	"io/fs"
@@ -177,7 +176,7 @@ func generateSidebarElement(snippetName string, base string, level int) *elem.El
 				attrs.Class: "hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5",
 				attrs.Href:  ROOT_DIRECTORY + "/snippets/" + snippetName + "/",
 			},
-			elem.Text("📄README"),
+			elem.Text("readme"),
 		)
 
 		content.Children = append(content.Children, anchorElement)
@@ -188,18 +187,25 @@ func generateSidebarElement(snippetName string, base string, level int) *elem.El
 			continue
 		}
 
-		anchorElementIcon := helper.Ternary(e.IsDir(), "🗂️", "📄")
+		anchorElementIconSrc := ROOT_DIRECTORY + "/OcChevrondown2.svg"
 
 		anchorElement := elem.A(
 			attrs.Props{
-				attrs.Class: "hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5",
+				attrs.Class: "hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 px-1 py-0.5 cursor-pointer",
 				attrs.Style: styles.Props{
 					styles.PaddingLeft: fmt.Sprint("calc(var(--spacing) * ", (2*level)+1, ")"),
 				}.ToInline(),
 			},
-
-			elem.Text(anchorElementIcon+e.Name()),
 		)
+		if e.IsDir() {
+			// add folder icon
+			anchorElement.Children = append(anchorElement.Children, elem.Img(attrs.Props{attrs.Src: anchorElementIconSrc, attrs.Class: "inline"}))
+		} else {
+			anchorElement.Children = append(anchorElement.Children, elem.Div(attrs.Props{attrs.Class: "mr-2 inline"}))
+		}
+		// add file/dir name
+		anchorElement.Children = append(anchorElement.Children, elem.Text(e.Name()))
+
 		if !e.IsDir() {
 			anchorElement.Attrs[attrs.Href] = ROOT_DIRECTORY + "/snippets/" + snippetName + "/" + base + e.Name()
 			content.Children = append(content.Children, anchorElement)
@@ -211,7 +217,7 @@ func generateSidebarElement(snippetName string, base string, level int) *elem.El
 		containerID := fmt.Sprintf("dir-%s-%d", base+e.Name(), level)
 
 		childContainer := elem.Div(attrs.Props{
-			attrs.Class: "ml-2 flex flex-col",
+			attrs.Class: "flex flex-col",
 			attrs.ID:    containerID,
 		}, generateSidebarElement(snippetName, base+e.Name()+"/", level+1))
 
